@@ -8,20 +8,23 @@ import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import Icon from "@material-ui/core/Icon";
 // core components
 import Card from "components/Card/Card.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 
-import customTabsStyle from "assets/jss/boilerplate-react/components/customTabsStyle.jsx";
+import customTabsStyle from "assets/jss/material-kit-react/components/customTabsStyle.jsx";
 
 class CustomTabs extends React.Component {
   state = {
     value: 0
   };
+
   handleChange = (event, value) => {
     this.setState({ value });
   };
+
   render() {
     const {
       classes,
@@ -46,24 +49,25 @@ class CustomTabs extends React.Component {
             onChange={this.handleChange}
             classes={{
               root: classes.tabsRoot,
-              indicator: classes.displayNone,
-              scrollButtons: classes.displayNone
+              indicator: classes.displayNone
             }}
-            variant="scrollable"
-            scrollButtons="auto"
           >
             {tabs.map((prop, key) => {
               var icon = {};
               if (prop.tabIcon) {
                 icon = {
-                  icon: <prop.tabIcon />
+                  icon:
+                    typeof prop.tabIcon === "string" ? (
+                      <Icon>{prop.tabIcon}</Icon>
+                    ) : (
+                      <prop.tabIcon />
+                    )
                 };
               }
               return (
                 <Tab
                   classes={{
                     root: classes.tabRootButton,
-                    labelContainer: classes.tabLabelContainer,
                     label: classes.tabLabel,
                     selected: classes.tabSelected,
                     wrapper: classes.tabWrapper
@@ -96,13 +100,14 @@ CustomTabs.propTypes = {
     "success",
     "danger",
     "info",
-    "primary"
+    "primary",
+    "rose"
   ]),
   title: PropTypes.string,
   tabs: PropTypes.arrayOf(
     PropTypes.shape({
       tabName: PropTypes.string.isRequired,
-      tabIcon: PropTypes.func,
+      tabIcon: PropTypes.object,
       tabContent: PropTypes.node.isRequired
     })
   ),

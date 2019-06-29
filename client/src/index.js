@@ -9,7 +9,8 @@ import { createBrowserHistory } from "history";
 
 import rootReducer from './reducers/rootReducer';
 import Root from "./containers/Root.jsx";
-import "./assets/css/boilerplate-react.css?v=0.1.0";
+
+import "assets/scss/material-kit-react.scss?v=1.7.0";
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const hist = createBrowserHistory();

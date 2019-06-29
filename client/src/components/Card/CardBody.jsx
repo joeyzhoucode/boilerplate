@@ -8,14 +8,12 @@ import withStyles from "@material-ui/core/styles/withStyles";
 // @material-ui/icons
 
 // core components
-import cardBodyStyle from "assets/jss/boilerplate-react/components/cardBodyStyle.jsx";
+import cardBodyStyle from "assets/jss/material-kit-react/components/cardBodyStyle.jsx";
 
 function CardBody({ ...props }) {
-  const { classes, className, children, plain, profile, ...rest } = props;
+  const { classes, className, children, ...rest } = props;
   const cardBodyClasses = classNames({
     [classes.cardBody]: true,
-    [classes.cardBodyPlain]: plain,
-    [classes.cardBodyProfile]: profile,
     [className]: className !== undefined
   });
   return (
@@ -28,8 +26,7 @@ function CardBody({ ...props }) {
 CardBody.propTypes = {
   classes: PropTypes.object.isRequired,
   className: PropTypes.string,
-  plain: PropTypes.bool,
-  profile: PropTypes.bool
+  children: PropTypes.node
 };
 
 export default withStyles(cardBodyStyle)(CardBody);

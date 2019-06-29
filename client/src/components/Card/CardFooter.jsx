@@ -8,25 +8,12 @@ import withStyles from "@material-ui/core/styles/withStyles";
 // @material-ui/icons
 
 // core components
-import cardFooterStyle from "assets/jss/boilerplate-react/components/cardFooterStyle.jsx";
+import cardFooterStyle from "assets/jss/material-kit-react/components/cardFooterStyle.jsx";
 
 function CardFooter({ ...props }) {
-  const {
-    classes,
-    className,
-    children,
-    plain,
-    profile,
-    stats,
-    chart,
-    ...rest
-  } = props;
+  const { classes, className, children, ...rest } = props;
   const cardFooterClasses = classNames({
     [classes.cardFooter]: true,
-    [classes.cardFooterPlain]: plain,
-    [classes.cardFooterProfile]: profile,
-    [classes.cardFooterStats]: stats,
-    [classes.cardFooterChart]: chart,
     [className]: className !== undefined
   });
   return (
@@ -39,10 +26,7 @@ function CardFooter({ ...props }) {
 CardFooter.propTypes = {
   classes: PropTypes.object.isRequired,
   className: PropTypes.string,
-  plain: PropTypes.bool,
-  profile: PropTypes.bool,
-  stats: PropTypes.bool,
-  chart: PropTypes.bool
+  children: PropTypes.node
 };
 
 export default withStyles(cardFooterStyle)(CardFooter);

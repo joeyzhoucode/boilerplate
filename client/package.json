@@ -1,29 +1,30 @@
 {
   "name": "client",
   "version": "0.1.0",
-  "license": "MIT",
   "private": true,
   "proxy": "http://localhost:3001",
   "main": "dist/index.js",
   "dependencies": {
-    "@material-ui/core": "^3.9.3",
-    "@material-ui/icons": "3.0.2",
+    "@material-ui/core": "4.1.0",
+    "@material-ui/icons": "4.1.0",
     "actioncable": "^5.2.3",
-    "chartist": "0.10.1",
     "classnames": "2.2.6",
     "connected-react-router": "^6.4.0",
-    "history": "4.7.2",
-    "perfect-scrollbar": "1.4.0",
+    "history": "4.9.0",
+    "moment": "2.24.0",
+    "node-sass": "4.12.0",
+    "nouislider": "13.1.5",
     "prettier": "1.16.4",
-    "prop-types": "15.7.1",
-    "react": "^16.8.6",
-    "react-chartist": "0.13.3",
-    "react-dom": "^16.8.6",
+    "prop-types": "15.7.2",
+    "react": "16.8.6",
+    "react-datetime": "2.16.3",
+    "react-dom": "16.8.6",
     "react-player": "^1.11.0",
     "react-redux": "^7.0.3",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4",
-    "react-swipeable-views": "0.13.1",
+    "react-router-dom": "5.0.1",
+    "react-scripts": "3.0.1",
+    "react-slick": "0.24.0",
+    "react-swipeable-views": "0.13.3",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "semantic-ui-css": "^2.3.1",
@@ -44,5 +45,17 @@
     "eslint-config-prettier": "4.0.0",
     "eslint-plugin-prettier": "3.0.1",
     "standard": "^11.0.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
