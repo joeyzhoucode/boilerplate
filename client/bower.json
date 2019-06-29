@@ -1,0 +1,18 @@
+{
+  "name": "boilerplate-client",
+  "homepage": "https://github.com/joeyzhoucode/boilerplate",
+  "authors": [
+    "joeyzhoucode"
+  ],
+  "description": "Boilerplate Client based on Material Design",
+  "main": "public/index.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "build"
+  ],
+  "private": true
+}
