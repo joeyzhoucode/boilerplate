@@ -378,14 +378,6 @@ class SectionNavbars extends React.Component {
                         classes.navLink + " " + classes.socialIconsButton
                       }
                     >
-                      <i
-                        className={
-                          classes.socialIcons +
-                          " " +
-                          classes.marginRight5 +
-                          " fab fa-twitter"
-                        }
-                      />{" "}
                       Twitter
                     </Button>
                   </ListItem>
@@ -396,14 +388,6 @@ class SectionNavbars extends React.Component {
                         classes.navLink + " " + classes.socialIconsButton
                       }
                     >
-                      <i
-                        className={
-                          classes.socialIcons +
-                          " " +
-                          classes.marginRight5 +
-                          " fab fa-facebook"
-                        }
-                      />{" "}
                       Facebook
                     </Button>
                   </ListItem>
@@ -414,14 +398,6 @@ class SectionNavbars extends React.Component {
                         classes.navLink + " " + classes.socialIconsButton
                       }
                     >
-                      <i
-                        className={
-                          classes.socialIcons +
-                          " " +
-                          classes.marginRight5 +
-                          " fab fa-instagram"
-                        }
-                      />{" "}
                       Instagram
                     </Button>
                   </ListItem>

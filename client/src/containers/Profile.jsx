@@ -47,7 +47,7 @@ class ProfilePage extends React.Component {
       <div>
         <Header
           color="transparent"
-          brand="Material Kit React"
+          brand="Boilerplate"
           rightLinks={<HeaderLinks />}
           fixed
           changeColorOnScroll={{
@@ -67,8 +67,8 @@ class ProfilePage extends React.Component {
                       <img src={profile} alt="..." className={imageClasses} />
                     </div>
                     <div className={classes.name}>
-                      <h3 className={classes.title}>Christian Louboutin</h3>
-                      <h6>DESIGNER</h6>
+                      <h3 className={classes.title}>Yi Zhou</h3>
+                      <h6>DEVELOPER</h6>
                       <Button justIcon link className={classes.margin5}>
                         <i className={"fab fa-twitter"} />
                       </Button>

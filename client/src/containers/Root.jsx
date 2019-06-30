@@ -5,9 +5,9 @@ import { Route, Switch } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 
 import Components from "containers/Components/Components.jsx";
-import LandingPage from "containers/LandingPage.jsx";
-import ProfilePage from "containers/ProfilePage.jsx";
-import LoginPage from "containers/LoginPage.jsx";
+import LandingPage from "containers/Landing.jsx";
+import ProfilePage from "containers/Profile.jsx";
+import LoginPage from "containers/Login.jsx";
 
 const Root = ({ store, history }) => (
   <Provider store={store}>

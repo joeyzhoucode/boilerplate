@@ -28,7 +28,6 @@ import SectionCarousel from "./Sections/SectionCarousel.jsx";
 import SectionCompletedExamples from "./Sections/SectionCompletedExamples.jsx";
 import SectionLogin from "./Sections/SectionLogin.jsx";
 import SectionExamples from "./Sections/SectionExamples.jsx";
-import SectionDownload from "./Sections/SectionDownload.jsx";
 
 import componentsStyle from "assets/jss/material-kit-react/views/components.jsx";
 
@@ -38,7 +37,7 @@ class Components extends React.Component {
     return (
       <div>
         <Header
-          brand="Material Kit React"
+          brand="Boilerplate"
           rightLinks={<HeaderLinks />}
           fixed
           color="transparent"
@@ -53,9 +52,9 @@ class Components extends React.Component {
             <GridContainer>
               <GridItem>
                 <div className={classes.brand}>
-                  <h1 className={classes.title}>Material Kit React.</h1>
+                  <h1 className={classes.title}>Boilerplate.</h1>
                   <h3 className={classes.subtitle}>
-                    A Badass Material-UI Kit based on Material Design.
+                    A boilerplate that just works.
                   </h3>
                 </div>
               </GridItem>
@@ -82,7 +81,6 @@ class Components extends React.Component {
             </Link>
           </GridItem>
           <SectionExamples />
-          <SectionDownload />
         </div>
         <Footer />
       </div>
