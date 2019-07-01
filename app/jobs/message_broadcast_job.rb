@@ -1,20 +1,14 @@
 class MessageBroadcastJob < ApplicationJob
   queue_as :default
-  MESSAGE_TYPE = "MESSAGE"
 
   def perform(message)
     payload = {
-      theatre_code: message.theatre.code,
-      payload_type: MESSAGE_TYPE,
+      room_name: message.room.name,
       content: message.content,
-      viewer: message.viewer,
-      audience: message.theatre.viewers.collect(&:id)
+      user: message.user,
+      audience: message.room.users.collect(&:id)
     }
 
-    ActionCable.server.broadcast(build_theatre_code(message.theatre.code), payload)
-  end
-
-  def build_theatre_code(code)
-    "Theatre-#{code}"
+    ActionCable.server.broadcast("#{message.room.name}", payload)
   end
 end
