@@ -1,13 +1,13 @@
 import ActionCable from 'actioncable'
 
-const BASE_URL = "localhost:3001"; // "boilerplate.xyz";
+const BASE_URL = window.location.hostname === "localhost" ? "localhost:3001" : window.location.hostname;
 const ACCESS_TOKEN = "accessToken";
 const CLIENT = "client";
 
 export const COMMAND_TYPE = "COMMAND";
 export const MESSAGE_TYPE = "MESSAGE";
 
-function theatreConnection(viewerId, callback, connectionType) {
+function webSocketConnection(viewerId, callback, connectionType) {
   let accessToken = localStorage.getItem(ACCESS_TOKEN);
   let client = localStorage.getItem(CLIENT);
 
@@ -19,11 +19,11 @@ function theatreConnection(viewerId, callback, connectionType) {
   this.connectionType = connectionType;
 
   this.connection = ActionCable.createConsumer(wsUrl);
-  this.theatreConnections = {};
+  this.webSocketConnections = {};
 }
 
-theatreConnection.prototype.command = function(videoId, seekSeconds, state, theatreCode) {
-  let theatreConnObj = this.theatreConnections[theatreCode];
+webSocketConnection.prototype.command = function(videoId, seekSeconds, state, theatreCode) {
+  let theatreConnObj = this.webSocketConnections[theatreCode];
   if (theatreConnObj) {
     theatreConnObj.broadcastCommand(videoId, seekSeconds, state);
   } else {
@@ -31,8 +31,8 @@ theatreConnection.prototype.command = function(videoId, seekSeconds, state, thea
   }
 }
 
-theatreConnection.prototype.message = function(content, theatreCode) {
-  let theatreConnObj = this.theatreConnections[theatreCode];
+webSocketConnection.prototype.message = function(content, theatreCode) {
+  let theatreConnObj = this.webSocketConnections[theatreCode];
   if (theatreConnObj) {
     theatreConnObj.broadcastMessage(content);
   } else {
@@ -40,21 +40,21 @@ theatreConnection.prototype.message = function(content, theatreCode) {
   }
 }
 
-theatreConnection.prototype.openNewTheatre = function(theatreCode) {
-  if (theatreCode !== undefined && !(theatreCode in this.theatreConnections)) {
-    this.theatreConnections[theatreCode] = this.createTheatreConnection(theatreCode);
+webSocketConnection.prototype.openNewTheatre = function(theatreCode) {
+  if (theatreCode !== undefined && !(theatreCode in this.webSocketConnections)) {
+    this.webSocketConnections[theatreCode] = this.createWebSocketConnection(theatreCode);
   } else {
-    this.theatreConnections[theatreCode].consumer.connect();
+    this.webSocketConnections[theatreCode].consumer.connect();
   }
 }
 
-theatreConnection.prototype.disconnect = function() {
-  Object.values(this.theatreConnections).forEach(c => {
+webSocketConnection.prototype.disconnect = function() {
+  Object.values(this.webSocketConnections).forEach(c => {
     c.consumer.disconnect();
   });
 }
 
-theatreConnection.prototype.createTheatreConnection = function(theatreCode) {
+webSocketConnection.prototype.createWebSocketConnection = function(theatreCode) {
   let scope = this;
   let connectionType;
   switch(scope.connectionType) {
@@ -98,4 +98,4 @@ theatreConnection.prototype.createTheatreConnection = function(theatreCode) {
   })
 }
 
-export default theatreConnection;
+export default webSocketConnection;

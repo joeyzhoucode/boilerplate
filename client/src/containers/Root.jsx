@@ -5,17 +5,17 @@ import { Route, Switch } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 
 import Components from "containers/Components/Components.jsx";
-import LandingPage from "containers/Landing.jsx";
-import ProfilePage from "containers/Profile.jsx";
-import LoginPage from "containers/Login.jsx";
+import Landing from "containers/Landing.jsx";
+import Profile from "containers/Profile.jsx";
+import Login from "containers/Login.jsx";
 
 const Root = ({ store, history }) => (
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <Switch>
-        <Route path="/landing" component={LandingPage} />
-        <Route path="/profile" component={ProfilePage} />
-        <Route path="/login" component={LoginPage} />
+        <Route path="/landing" component={Landing} />
+        <Route path="/profile" component={Profile} />
+        <Route path="/login" component={Login} />
         <Route path="/" component={Components} />
       </Switch>
     </ConnectedRouter>

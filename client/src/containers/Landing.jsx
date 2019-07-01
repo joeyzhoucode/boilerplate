@@ -1,8 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as navigatorActions from "actions/navigatorActions";
-import * as homeActions from "actions/homeActions";
 import * as profileActions from "actions/profileActions";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
@@ -92,16 +90,12 @@ LandingPage.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    path: state.router.location.pathname.substr(8),
-    navigator: state.navigator,
     profile: state.profile,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    navigatorActions: bindActionCreators(navigatorActions, dispatch),
-    homeActions: bindActionCreators(homeActions, dispatch),
     profileActions: bindActionCreators(profileActions, dispatch),
   }
 }
