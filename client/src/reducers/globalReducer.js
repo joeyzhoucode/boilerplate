@@ -1,6 +1,6 @@
 import { initialState } from './rootReducer';
-import theatreConnection from "../utils/theatreConnection";
-import { MESSAGE_TYPE } from '../utils/theatreConnection';
+import webSocketConnection from "utils/webSocketConnection";
+import { MESSAGE_TYPE } from 'utils/webSocketConnection';
 import { 
   NAVIGATOR_DRAWER_TOGGLE,
   NAVIGATOR_DRAWER_CLOSE,
@@ -10,9 +10,9 @@ import {
   MESSENGER_UNSUBSCRIBE,
   MESSENGER_RECIEVE,
   MESSENGER_BROADCAST,
-  } from '../actions/navigatorActions';
+  } from '../actions/globalActions';
 
-export default function navigator(state = initialState.navigator, action) {
+export default function global(state = initialState.global, action) {
   let newState;
   let newMessages;
   switch (action.type) {
@@ -48,7 +48,7 @@ export default function navigator(state = initialState.navigator, action) {
       }
       return newState;
     case MESSENGER_SUBSCRIBE:
-      const connection = state.connection || new theatreConnection(action.viewerId, action.callback, MESSAGE_TYPE);
+      const connection = state.connection || new webSocketConnection(action.viewerId, action.callback, MESSAGE_TYPE);
       connection.openNewTheatre(action.theatreCode);
       newState = {
         ...state,

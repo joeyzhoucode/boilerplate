@@ -13,10 +13,10 @@ const Root = ({ store, history }) => (
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <Switch>
-        <Route path="/landing" component={Landing} />
         <Route path="/profile" component={Profile} />
         <Route path="/login" component={Login} />
-        <Route path="/" component={Components} />
+        <Route path="/components" component={Components} />
+        <Route path="/" component={Landing} />
       </Switch>
     </ConnectedRouter>
   </Provider>

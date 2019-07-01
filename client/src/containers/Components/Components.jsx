@@ -1,4 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as globalActions from "actions/globalActions";
+import * as profileActions from "actions/profileActions";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // nodejs library that concatenates classes
@@ -38,7 +42,7 @@ class Components extends React.Component {
       <div>
         <Header
           brand="Boilerplate"
-          rightLinks={<HeaderLinks />}
+          rightLinks={<HeaderLinks redirectFn={this.props.globalActions.historyPush} />}
           fixed
           color="transparent"
           changeColorOnScroll={{
@@ -92,4 +96,17 @@ Components.propTypes = {
   classes: PropTypes.object
 };
 
-export default withStyles(componentsStyle)(Components);
+function mapStateToProps(state) {
+  return {
+    global: state.global,
+    profile: state.profile,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    globalActions: bindActionCreators(globalActions, dispatch),
+    profileActions: bindActionCreators(profileActions, dispatch),
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(componentsStyle)(Components));

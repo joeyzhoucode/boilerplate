@@ -6,9 +6,6 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { List, ListItem, withStyles } from "@material-ui/core";
 
-// @material-ui/icons
-import Favorite from "@material-ui/icons/Favorite";
-
 import footerStyle from "assets/jss/material-kit-react/components/footerStyle.jsx";
 
 function Footer({ ...props }) {
@@ -32,16 +29,7 @@ function Footer({ ...props }) {
                 className={classes.block}
                 target="_blank"
               >
-                Yi Zhou
-              </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                href="https://github.com/joeyzhoucode"
-                className={classes.block}
-                target="_blank"
-              >
-                About us
+                About Me
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
@@ -51,15 +39,6 @@ function Footer({ ...props }) {
                 target="_blank"
               >
                 Blog
-              </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                href="https://github.com/joeyzhoucode"
-                className={classes.block}
-                target="_blank"
-              >
-                Licenses
               </a>
             </ListItem>
           </List>

@@ -1,8 +1,12 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
-import profile from './profileReducer';
+import global from 'reducers/globalReducer';
+import profile from 'reducers/profileReducer';
 
 export const initialState = {
+  global: {
+    
+  },
   profile: {
     id: null,
     firstName: "John",
@@ -14,5 +18,6 @@ export const initialState = {
 
 export default(history) => combineReducers({
   router: connectRouter(history),
+  global,
   profile,
 })

@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import * as globalActions from "actions/globalActions";
 import * as profileActions from "actions/profileActions";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
@@ -53,7 +54,7 @@ class LandingPage extends React.Component {
           color="transparent"
           routes={dashboardRoutes}
           brand="Boilerplate"
-          rightLinks={<HeaderLinks />}
+          rightLinks={<HeaderLinks redirectFn={this.props.globalActions.historyPush} />}
           fixed
           changeColorOnScroll={{
             height: 400,
@@ -91,7 +92,7 @@ class LandingPage extends React.Component {
             <div className={classes.section}>
               <GridContainer justify="center">
                 <GridItem xs={12} sm={12} md={8}>
-                  <h2 className={classes.title}>Let{"'"}s talk product</h2>
+                  <h2 className={classes.description}>Let{"'"}s talk product</h2>
                   <h5 className={classes.description}>
                     This is the paragraph where you can write more details about your
                     product. Keep you user engaged by providing meaningful
@@ -134,7 +135,7 @@ class LandingPage extends React.Component {
               </div>
             </div>
             <div className={classes.section}>
-              <h2 className={classes.title}>Here is our team</h2>
+              <h2 className={classes.description}>Here is our team</h2>
               <div>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={4}>
@@ -209,7 +210,7 @@ class LandingPage extends React.Component {
             <div className={classes.section}>
               <GridContainer justify="center">
                 <GridItem cs={12} sm={12} md={8}>
-                  <h2 className={classes.title}>Work with us</h2>
+                  <h2 className={classes.description}>Work with us</h2>
                   <h4 className={classes.description}>
                     Divide details about your product or agency work into parts. Write
                     a few lines about each one and contact us about any further
@@ -277,12 +278,14 @@ LandingPage.propTypes = {
 
 function mapStateToProps(state) {
   return {
+    global: state.global,
     profile: state.profile,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
+    globalActions: bindActionCreators(globalActions, dispatch),
     profileActions: bindActionCreators(profileActions, dispatch),
   }
 }

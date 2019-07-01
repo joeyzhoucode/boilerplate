@@ -1,4 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as globalActions from "actions/globalActions";
+import * as profileActions from "actions/profileActions";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // @material-ui/core components
@@ -50,7 +54,7 @@ class LoginPage extends React.Component {
           absolute
           color="transparent"
           brand="Boilerplate"
-          rightLinks={<HeaderLinks />}
+          rightLinks={<HeaderLinks redirectFn={this.props.globalActions.historyPush} />}
           {...rest}
         />
         <div
@@ -170,4 +174,17 @@ LoginPage.propTypes = {
   classes: PropTypes.object
 };
 
-export default withStyles(loginPageStyle)(LoginPage);
+function mapStateToProps(state) {
+  return {
+    global: state.global,
+    profile: state.profile,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    globalActions: bindActionCreators(globalActions, dispatch),
+    profileActions: bindActionCreators(profileActions, dispatch),
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(loginPageStyle)(LoginPage));
