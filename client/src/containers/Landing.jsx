@@ -10,13 +10,13 @@ import classNames from "classnames";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 
+import HeaderLinks from "containers/HeaderLinks.jsx";
 // core components
 import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import Button from "components/CustomButtons/Button.jsx";
-import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
 
 // Product Section
@@ -36,7 +36,7 @@ import team3 from "assets/img/faces/kendall.jpg";
 // Work Section
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 
-import landingPageStyle from "assets/jss/material-kit-react/views/landingPage.jsx";
+import landingPageStyle from "assets/jss/material-kit-react/containers/landingPage.jsx";
 
 const dashboardRoutes = [];
 
@@ -54,7 +54,7 @@ class LandingPage extends React.Component {
           color="transparent"
           routes={dashboardRoutes}
           brand="Boilerplate"
-          rightLinks={<HeaderLinks redirectFn={this.props.globalActions.historyPush} />}
+          rightLinks={<HeaderLinks/>}
           fixed
           changeColorOnScroll={{
             height: 400,

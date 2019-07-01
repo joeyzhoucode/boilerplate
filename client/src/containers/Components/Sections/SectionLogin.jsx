@@ -18,7 +18,7 @@ import CardFooter from "components/Card/CardFooter.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 
-import loginStyle from "assets/jss/material-kit-react/views/componentsSections/loginStyle.jsx";
+import loginStyle from "assets/jss/material-kit-react/containers/componentsSections/loginStyle.jsx";
 
 class SectionLogin extends React.Component {
   render() {

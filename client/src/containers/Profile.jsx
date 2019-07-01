@@ -13,13 +13,14 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Camera from "@material-ui/icons/Camera";
 import Palette from "@material-ui/icons/Palette";
 import Favorite from "@material-ui/icons/Favorite";
+
+import HeaderLinks from "containers/HeaderLinks.jsx";
 // core components
 import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
-import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import NavPills from "components/NavPills/NavPills.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
 
@@ -36,7 +37,7 @@ import work3 from "assets/img/examples/cynthia-del-rio.jpg";
 import work4 from "assets/img/examples/mariya-georgieva.jpg";
 import work5 from "assets/img/examples/clem-onojegaw.jpg";
 
-import profilePageStyle from "assets/jss/material-kit-react/views/profilePage.jsx";
+import profilePageStyle from "assets/jss/material-kit-react/containers/profilePage.jsx";
 
 class ProfilePage extends React.Component {
   render() {
@@ -52,7 +53,7 @@ class ProfilePage extends React.Component {
         <Header
           color="transparent"
           brand="Boilerplate"
-          rightLinks={<HeaderLinks redirectFn={this.props.globalActions.historyPush} />}
+          rightLinks={<HeaderLinks/>}
           fixed
           changeColorOnScroll={{
             height: 200,

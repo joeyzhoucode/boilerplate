@@ -12,6 +12,8 @@ import { Link } from "react-router-dom";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 // @material-ui/icons
+
+import HeaderLinks from "containers/HeaderLinks.jsx";
 // core components
 import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
@@ -20,7 +22,6 @@ import GridItem from "components/Grid/GridItem.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
 // sections for this page
-import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import SectionBasics from "./Sections/SectionBasics.jsx";
 import SectionNavbars from "./Sections/SectionNavbars.jsx";
 import SectionTabs from "./Sections/SectionTabs.jsx";
@@ -33,7 +34,7 @@ import SectionCompletedExamples from "./Sections/SectionCompletedExamples.jsx";
 import SectionLogin from "./Sections/SectionLogin.jsx";
 import SectionExamples from "./Sections/SectionExamples.jsx";
 
-import componentsStyle from "assets/jss/material-kit-react/views/components.jsx";
+import componentsStyle from "assets/jss/material-kit-react/containers/components.jsx";
 
 class Components extends React.Component {
   render() {
@@ -42,7 +43,7 @@ class Components extends React.Component {
       <div>
         <Header
           brand="Boilerplate"
-          rightLinks={<HeaderLinks redirectFn={this.props.globalActions.historyPush} />}
+          rightLinks={<HeaderLinks/>}
           fixed
           color="transparent"
           changeColorOnScroll={{

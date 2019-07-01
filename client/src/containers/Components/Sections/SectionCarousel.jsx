@@ -11,7 +11,7 @@ import LocationOn from "@material-ui/icons/LocationOn";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import Card from "components/Card/Card.jsx";
-import carouselStyle from "assets/jss/material-kit-react/views/componentsSections/carouselStyle.jsx";
+import carouselStyle from "assets/jss/material-kit-react/containers/componentsSections/carouselStyle.jsx";
 import image1 from "assets/img/bg.jpg";
 import image2 from "assets/img/bg2.jpg";
 import image3 from "assets/img/bg3.jpg";

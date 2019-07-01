@@ -13,7 +13,7 @@ import List from "@material-ui/icons/List";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import NavPills from "components/NavPills/NavPills.jsx";
-import pillsStyle from "assets/jss/material-kit-react/views/componentsSections/pillsStyle.jsx";
+import pillsStyle from "assets/jss/material-kit-react/containers/componentsSections/pillsStyle.jsx";
 
 class SectionPills extends React.Component {
   render() {

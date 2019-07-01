@@ -24,7 +24,7 @@ import CustomLinearProgress from "components/CustomLinearProgress/CustomLinearPr
 import Paginations from "components/Pagination/Pagination.jsx";
 import Badge from "components/Badge/Badge.jsx";
 
-import basicsStyle from "assets/jss/material-kit-react/views/componentsSections/basicsStyle.jsx";
+import basicsStyle from "assets/jss/material-kit-react/containers/componentsSections/basicsStyle.jsx";
 
 class SectionBasics extends React.Component {
   state = {
