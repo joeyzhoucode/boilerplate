@@ -1,8 +1,7 @@
 class MessengerChannel < ApplicationCable::Channel
   def subscribed
-    if params[:theatre_code].present?
-      # creates a private chat theatre with a unique name
-      stream_from("Theatre-#{(params[:theatre_code])}")
+    if params[:room_name].present?
+      stream_from("#{(params[:room_name])}")
     end
   end
 
@@ -10,32 +9,32 @@ class MessengerChannel < ApplicationCable::Channel
     # Any cleanup needed when channel is unsubscribed
   end
 
-  def speak(data)
-    viewer = get_viewer(data['viewer_id'])
-    theatre_code = data['theatre_code']
-    message = data['message']
+  def broadcast(data)
+    user = get_user(data['user_id'])
+    room_name = data['room_name']
+    content = data['content']
 
-    raise 'No theatre_code!' if theatre_code.blank?
-    theatre = get_theatre(theatre_code) # A theatre is a theatre
-    raise 'No theatre found!' if theatre.blank?
-    raise 'No message!' if message.blank?
+    raise 'No room_name!' if room_name.blank?
+    room = get_room(room_name)
+    raise 'No room found!' if room.blank?
+    raise 'No content!' if content.blank?
 
-    # adds the message viewer to the theatre if not already included
-    theatre.viewers << viewer unless theatre.viewers.include?(viewer)
-    # saves the message and its data to the DB
-    # Note: this does not broadcast to the clients yet!
+    room.users << user unless room.users.include?(user)
+
     Message.create!(
-      theatre: theatre,
-      viewer: viewer,
-      content: message
+      room: room,
+      user: user,
+      content: content
     )
   end
 
-  def get_viewer(id)
-    Viewer.find_by(id: id)
+  private
+
+  def get_user(id)
+    User.find_by(id: id)
   end
 
-  def get_theatre(code)
-    Theatre.find_by(code: code)
+  def get_room(name)
+    Room.find_by(name: name)
   end
 end
