@@ -3,7 +3,7 @@ require 'faker'
 class TheatresController < ApplicationController
   def index
     theatres = Theatre.all.map do |t|
-      {id: t.id, code: t.code, viewers: t.viewers.size }
+      {id: t.id, code: t.code, users: t.users.size }
     end
     render json: theatres
   end
@@ -17,11 +17,11 @@ class TheatresController < ApplicationController
   end
 
   def create
-    viewer = Viewer.find(request.session[:viewer_id])
+    user = User.find(request.session[:user_id])
     data = JSON.parse(request.body.read())
     code = data["theatre_code"]
     theatre = Theatre.create!(code: code)
-    theatre.viewers << viewer
+    theatre.users << user
     render json: { code: code }
   end
 
@@ -32,7 +32,7 @@ class TheatresController < ApplicationController
   def destroy
     Theatre.find(params[:id]).destroy
     theatres = Theatre.all.map do |t|
-      {id: t.id, code: t.code, viewers: t.viewers.size }
+      {id: t.id, code: t.code, users: t.users.size }
     end
     render json: theatres
   end

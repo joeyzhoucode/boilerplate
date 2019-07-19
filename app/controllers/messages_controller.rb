@@ -3,9 +3,9 @@ class MessagesController < ApplicationController
 
   def index
     all_messages = Message.all.map do |m|
-      viewer = Viewer.find_by(id: m.viewer_id)
+      user = User.find_by(id: m.user_id)
       theatre = Theatre.find_by(id: m.theatre_id)
-      { theatre_code: theatre.code, first_name: viewer.first_name, last_name: viewer.last_name, content: m.content, payload_type: MESSAGE_TYPE }
+      { theatre_code: theatre.code, first_name: user.first_name, last_name: user.last_name, content: m.content, payload_type: MESSAGE_TYPE }
     end
     render json: all_messages
   end
@@ -13,8 +13,8 @@ class MessagesController < ApplicationController
   def show
     theatre = Theatre.find_by(code: params[:id])
     theatre_messages = Message.where(theatre_id: theatre.id).map do |m|
-      viewer = Viewer.find_by(id: m.viewer_id)
-      { first_name: viewer.first_name, last_name: viewer.last_name, content: m.content, payload_type: MESSAGE_TYPE }
+      user = User.find_by(id: m.user_id)
+      { first_name: user.first_name, last_name: user.last_name, content: m.content, payload_type: MESSAGE_TYPE }
     end
     render json: theatre_messages
   end

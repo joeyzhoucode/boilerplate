@@ -8,19 +8,19 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
 
   get '*path', to: redirect('/login'), constraints: ->(request) do
-    request.session[:viewer_id].nil? && !request.xhr? && request.format.html?
+    request.session[:user_id].nil? && !request.xhr? && request.format.html?
   end
 
   scope '/api' do
-    get 'viewer', to: 'viewers#show'
+    get 'user', to: 'users#show'
     get 'theatres/new', to: 'theatres#new'
     resources :theatres
-    resources :viewers
+    resources :users
     resources :messages
     resources :commands
   end
 
   get '*path', to: "application#index", constraints: ->(request) do
-    request.session[:viewer_id] && !request.xhr? && request.format.html?
+    request.session[:user_id] && !request.xhr? && request.format.html?
   end
 end
