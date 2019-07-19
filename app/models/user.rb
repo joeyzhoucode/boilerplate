@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_and_belongs_to_many :rooms, dependent: :destroy
+  has_and_belongs_to_many :groups, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true
 

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TheatresControllerTest < ActionDispatch::IntegrationTest
+class GroupTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

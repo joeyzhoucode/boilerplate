@@ -13,8 +13,8 @@ Rails.application.routes.draw do
 
   scope '/api' do
     get 'user', to: 'users#show'
-    get 'theatres/new', to: 'theatres#new'
-    resources :theatres
+    get 'groups/new', to: 'groups#new'
+    resources :groups
     resources :users
     resources :messages
     resources :commands

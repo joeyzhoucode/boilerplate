@@ -3,12 +3,12 @@ class MessageBroadcastJob < ApplicationJob
 
   def perform(message)
     payload = {
-      room_name: message.room.name,
+      group_name: message.group.name,
       content: message.content,
       user: message.user,
-      audience: message.room.users.collect(&:id)
+      audience: message.group.users.collect(&:id)
     }
 
-    ActionCable.server.broadcast("#{message.room.name}", payload)
+    ActionCable.server.broadcast("#{message.group.name}", payload)
   end
 end

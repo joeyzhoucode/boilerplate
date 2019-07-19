@@ -1,7 +1,7 @@
 class MessengerChannel < ApplicationCable::Channel
   def subscribed
-    if params[:room_name].present?
-      stream_from("#{(params[:room_name])}")
+    if params[:group_name].present?
+      stream_from("#{(params[:group_name])}")
     end
   end
 
@@ -11,18 +11,18 @@ class MessengerChannel < ApplicationCable::Channel
 
   def broadcast(data)
     user = get_user(data['user_id'])
-    room_name = data['room_name']
+    group_name = data['group_name']
     content = data['content']
 
-    raise 'No room_name!' if room_name.blank?
-    room = get_room(room_name)
-    raise 'No room found!' if room.blank?
+    raise 'No group_name!' if group_name.blank?
+    group = get_group(group_name)
+    raise 'No group found!' if group.blank?
     raise 'No content!' if content.blank?
 
-    room.users << user unless room.users.include?(user)
+    group.users << user unless group.users.include?(user)
 
     Message.create!(
-      room: room,
+      group: group,
       user: user,
       content: content
     )
@@ -34,7 +34,7 @@ class MessengerChannel < ApplicationCable::Channel
     User.find_by(id: id)
   end
 
-  def get_room(name)
-    Room.find_by(name: name)
+  def get_group(name)
+    Group.find_by(name: name)
   end
 end
