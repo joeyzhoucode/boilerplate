@@ -76,30 +76,24 @@ class LoginPage extends React.Component {
                       <div className={classes.socialLine}>
                         <Button
                           justIcon
-                          href="#pablo"
-                          target="_blank"
+                          href="/auth/google_oauth2"
                           color="transparent"
-                          onClick={e => e.preventDefault()}
                         >
-                          <i className={"fab fa-twitter"} />
+                          <i className={"fab fa-google"} />
                         </Button>
                         <Button
                           justIcon
-                          href="#pablo"
-                          target="_blank"
+                          href="/auth/facebook"
                           color="transparent"
-                          onClick={e => e.preventDefault()}
                         >
                           <i className={"fab fa-facebook"} />
                         </Button>
                         <Button
                           justIcon
-                          href="#pablo"
-                          target="_blank"
+                          href="/auth/github"
                           color="transparent"
-                          onClick={e => e.preventDefault()}
                         >
-                          <i className={"fab fa-google-plus-g"} />
+                          <i className={"fab fa-github"} />
                         </Button>
                       </div>
                     </CardHeader>
