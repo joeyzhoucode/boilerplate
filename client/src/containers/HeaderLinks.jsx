@@ -3,6 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as globalActions from "actions/globalActions";
+import * as profileActions from "actions/profileActions";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // react components for routing our app without refresh
@@ -108,12 +109,14 @@ HeaderLinks.propTypes = {
 function mapStateToProps(state) {
   return {
     global: state.global,
+    profile: state.profile,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     globalActions: bindActionCreators(globalActions, dispatch),
+    profileActions: bindActionCreators(profileActions, dispatch),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(headerLinksStyle)(HeaderLinks));

@@ -10,8 +10,8 @@ class MessengerChannel < ApplicationCable::Channel
   end
 
   def broadcast(data)
-    user = get_user(data['user_id'])
     group_name = data['group_name']
+    user = get_user(data['user_id'])
     content = data['content']
 
     raise 'No group_name!' if group_name.blank?

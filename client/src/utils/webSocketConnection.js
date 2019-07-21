@@ -54,12 +54,12 @@ webSocketConnection.prototype.createWebSocketConnection = function(groupName) {
     default:
       connectionType = undefined;
   }
-  return this.connection.subscriptions.create({channel: 'channel', group_name: groupName, user_id: scope.userId}, {
+  return this.connection.subscriptions.create({channel: connectionType + 'Channel', group_name: groupName, user_id: scope.userId}, {
     connected: function() {
-      console.log(connectionType + ' connected to channel. Group: ' + groupName + '.')
+      console.log(connectionType + ' connected to channel. Group Name: ' + groupName + '.')
     },
     disconnected: function() {
-      console.log(connectionType +  ' disconnected from channel. Group: ' + groupName + '.')
+      console.log(connectionType +  ' disconnected from channel. Group Name: ' + groupName + '.')
     },
     received: function(data) {
       if (data.audience.indexOf(scope.userId) !== -1) {
@@ -67,7 +67,7 @@ webSocketConnection.prototype.createWebSocketConnection = function(groupName) {
       }
     },
     broadcastMessage: function(content) {
-      return this.perform('broadcast_message', {
+      return this.perform('broadcast', {
         group_name: groupName,
         user_id: scope.userId,
         content: content

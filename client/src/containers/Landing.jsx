@@ -35,7 +35,13 @@ const dashboardRoutes = [];
 class LandingPage extends React.Component {
   componentDidMount() {
     this.props.profileActions.profileFetch();
-    this.props.globalActions.messengerSubscribe(1, 'Global', data => { console.log(data) });
+  }
+
+  componentDidUpdate() {
+    const userId = this.props.profile.id;
+    if(userId && !this.props.global.connection) {
+      this.props.globalActions.messengerSubscribe(userId, "Global", data => { console.log(data); });
+    }
   }
 
   render() {
@@ -118,7 +124,12 @@ class LandingPage extends React.Component {
                           md={4}
                           className={classes.textCenter}
                         >
-                          <Button color="primary">Send Message To Console</Button>
+                          <Button
+                            color="primary"
+                            onClick={() => { this.props.globalActions.messengerBroadcast({ message: "Hello World!", groupName: "Global" }) }}
+                          >
+                            Send Message To Console
+                          </Button>
                         </GridItem>
                       </GridContainer>
                     </GridContainer>

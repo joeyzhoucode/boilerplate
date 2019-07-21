@@ -66,9 +66,6 @@ export default function global(state = initialState.global, action) {
       }
       return newState;
     case MESSENGER_RECIEVE:
-      if(action.data.payload_type !== MESSAGE_TYPE) {
-        return state;
-      }
       newMessages = state.messages;
       newMessages.push({
         userName: action.data.user.first_name + " " + action.data.user.last_name,

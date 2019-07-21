@@ -17,7 +17,6 @@ Rails.application.routes.draw do
     resources :groups
     resources :users
     resources :messages
-    resources :commands
   end
 
   get '*path', to: "application#index", constraints: ->(request) do
