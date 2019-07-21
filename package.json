@@ -2,7 +2,7 @@
   "name": "boilerplate",
   "license": "MIT",
   "engines": {
-    "node": "8.9.4",
+    "node": "10.16.0",
     "yarn": "1.6.0"
   },
   "scripts": {
