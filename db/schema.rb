@@ -10,52 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_15_184932) do
+ActiveRecord::Schema.define(version: 2019_07_19_025635) do
 
-  create_table "commands", force: :cascade do |t|
-    t.integer "theatre_id"
-    t.integer "viewer_id"
-    t.string "video_id"
-    t.decimal "seek_seconds"
-    t.string "state"
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["theatre_id"], name: "index_commands_on_theatre_id"
-    t.index ["viewer_id"], name: "index_commands_on_viewer_id"
+  end
+
+  create_table "groups_users", id: false, force: :cascade do |t|
+    t.integer "group_id"
+    t.integer "user_id"
+    t.index ["group_id"], name: "index_groups_users_on_group_id"
+    t.index ["user_id"], name: "index_groups_users_on_user_id"
   end
 
   create_table "messages", force: :cascade do |t|
-    t.integer "theatre_id"
-    t.integer "viewer_id"
+    t.integer "group_id"
+    t.integer "user_id"
     t.text "content"
+    t.datetime "created"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["theatre_id"], name: "index_messages_on_theatre_id"
-    t.index ["viewer_id"], name: "index_messages_on_viewer_id"
+    t.index ["group_id"], name: "index_messages_on_group_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
-  create_table "theatres", force: :cascade do |t|
-    t.string "code"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "theatres_viewers", id: false, force: :cascade do |t|
-    t.integer "theatre_id"
-    t.integer "viewer_id"
-    t.index ["theatre_id"], name: "index_theatres_viewers_on_theatre_id"
-    t.index ["viewer_id"], name: "index_theatres_viewers_on_viewer_id"
-  end
-
-  create_table "viewers", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "first_name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "last_name"
     t.string "email"
+    t.string "image"
     t.string "google_token"
     t.string "google_refresh_token"
-    t.string "last_name"
-    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
