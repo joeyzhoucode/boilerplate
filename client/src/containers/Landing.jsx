@@ -25,14 +25,6 @@ import VerifiedUser from "@material-ui/icons/VerifiedUser";
 import Fingerprint from "@material-ui/icons/Fingerprint";
 import InfoArea from "components/InfoArea/InfoArea.jsx";
 
-// Team Section
-import Card from "components/Card/Card.jsx";
-import CardBody from "components/Card/CardBody.jsx";
-import CardFooter from "components/Card/CardFooter.jsx";
-import team1 from "assets/img/faces/avatar.jpg";
-import team2 from "assets/img/faces/christian.jpg";
-import team3 from "assets/img/faces/kendall.jpg";
-
 // Work Section
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 
@@ -41,13 +33,13 @@ import landingPageStyle from "assets/jss/material-kit-react/containers/landingPa
 const dashboardRoutes = [];
 
 class LandingPage extends React.Component {
+  componentDidMount() {
+    this.props.profileActions.profileFetch();
+    this.props.globalActions.messengerSubscribe(1, 'Global', data => { console.log(data) });
+  }
+
   render() {
     const { classes, ...rest } = this.props;
-    const imageClasses = classNames(
-      classes.imgRaised,
-      classes.imgRoundedCircle,
-      classes.imgFluid
-    );
     return (
       <div>
         <Header
@@ -102,6 +94,37 @@ class LandingPage extends React.Component {
                   </h5>
                 </GridItem>
               </GridContainer>
+              <GridContainer justify="center">
+                <GridItem cs={12} sm={12} md={8}>
+                  <h2 className={classes.description}>ActionCable Example</h2>
+                  <form>
+                    <GridContainer>
+                      <CustomInput
+                        labelText="Your Message"
+                        id="message"
+                        formControlProps={{
+                          fullWidth: true,
+                          className: classes.textArea
+                        }}
+                        inputProps={{
+                          multiline: true,
+                          rows: 5
+                        }}
+                      />
+                      <GridContainer justify="center">
+                        <GridItem
+                          xs={12}
+                          sm={12}
+                          md={4}
+                          className={classes.textCenter}
+                        >
+                          <Button color="primary">Send Message To Console</Button>
+                        </GridItem>
+                      </GridContainer>
+                    </GridContainer>
+                  </form>
+                </GridItem>
+              </GridContainer>
               <div>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={4}>
@@ -133,136 +156,6 @@ class LandingPage extends React.Component {
                   </GridItem>
                 </GridContainer>
               </div>
-            </div>
-            <div className={classes.section}>
-              <h2 className={classes.description}>Here is our team</h2>
-              <div>
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={4}>
-                    <Card plain>
-                      <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
-                        <img src={team1} alt="..." className={imageClasses} />
-                      </GridItem>
-                      <h4 className={classes.cardTitle}>
-                        Gigi Hadid
-                        <br />
-                        <small className={classes.smallTitle}>Model</small>
-                      </h4>
-                      <CardBody>
-                        <p className={classes.description}>
-                          You can write here details about one of your team members.
-                          You can give more details about what they do. Feel free to
-                          add some <a href="#pablo">links</a> for people to be able to
-                          follow them outside the site.
-                        </p>
-                      </CardBody>
-                      <CardFooter className={classes.justifyCenter}>
-                      </CardFooter>
-                    </Card>
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={4}>
-                    <Card plain>
-                      <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
-                        <img src={team2} alt="..." className={imageClasses} />
-                      </GridItem>
-                      <h4 className={classes.cardTitle}>
-                        Yi Zhou
-                        <br />
-                        <small className={classes.smallTitle}>Developer</small>
-                      </h4>
-                      <CardBody>
-                        <p className={classes.description}>
-                          You can write here details about one of your team members.
-                          You can give more details about what they do. Feel free to
-                          add some <a href="#pablo">links</a> for people to be able to
-                          follow them outside the site.
-                        </p>
-                      </CardBody>
-                      <CardFooter className={classes.justifyCenter}>
-                      </CardFooter>
-                    </Card>
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={4}>
-                    <Card plain>
-                      <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
-                        <img src={team3} alt="..." className={imageClasses} />
-                      </GridItem>
-                      <h4 className={classes.cardTitle}>
-                        Kendall Jenner
-                        <br />
-                        <small className={classes.smallTitle}>Model</small>
-                      </h4>
-                      <CardBody>
-                        <p className={classes.description}>
-                          You can write here details about one of your team members.
-                          You can give more details about what they do. Feel free to
-                          add some <a href="#pablo">links</a> for people to be able to
-                          follow them outside the site.
-                        </p>
-                      </CardBody>
-                      <CardFooter className={classes.justifyCenter}>
-                      </CardFooter>
-                    </Card>
-                  </GridItem>
-                </GridContainer>
-              </div>
-            </div>
-            <div className={classes.section}>
-              <GridContainer justify="center">
-                <GridItem cs={12} sm={12} md={8}>
-                  <h2 className={classes.description}>Work with us</h2>
-                  <h4 className={classes.description}>
-                    Divide details about your product or agency work into parts. Write
-                    a few lines about each one and contact us about any further
-                    collaboration. We will responde get back to you in a couple of
-                    hours.
-                  </h4>
-                  <form>
-                    <GridContainer>
-                      <GridItem xs={12} sm={12} md={6}>
-                        <CustomInput
-                          labelText="Your Name"
-                          id="name"
-                          formControlProps={{
-                            fullWidth: true
-                          }}
-                        />
-                      </GridItem>
-                      <GridItem xs={12} sm={12} md={6}>
-                        <CustomInput
-                          labelText="Your Email"
-                          id="email"
-                          formControlProps={{
-                            fullWidth: true
-                          }}
-                        />
-                      </GridItem>
-                      <CustomInput
-                        labelText="Your Message"
-                        id="message"
-                        formControlProps={{
-                          fullWidth: true,
-                          className: classes.textArea
-                        }}
-                        inputProps={{
-                          multiline: true,
-                          rows: 5
-                        }}
-                      />
-                      <GridContainer justify="center">
-                        <GridItem
-                          xs={12}
-                          sm={12}
-                          md={4}
-                          className={classes.textCenter}
-                        >
-                          <Button color="primary">Send Message</Button>
-                        </GridItem>
-                      </GridContainer>
-                    </GridContainer>
-                  </form>
-                </GridItem>
-              </GridContainer>
             </div>
           </div>
         </div>

@@ -78,6 +78,7 @@ class HeaderLinks extends React.Component {
             buttonIcon={Apps}
             dropdownList={[
               <Link
+                to="landing"
                 target="_blank"
                 className={classes.dropdownLink}
                 onClick={() => { this.props.globalActions.historyPush('/components'); }}
@@ -85,6 +86,7 @@ class HeaderLinks extends React.Component {
                 <Extension className={classes.icons} /> App 1
               </Link>,
               <Link
+                to="landing"
                 target="_blank"
                 className={classes.dropdownLink}
                 onClick={() => { this.props.globalActions.historyPush('/components'); }}
