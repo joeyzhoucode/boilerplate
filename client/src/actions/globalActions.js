@@ -27,9 +27,9 @@ export function updateMessageInput(messageInput) {
   return { type: UPDATE_MESSAGE_INPUT, messageInput: messageInput };
 }
 
-export function messengerFetch(theatreCode) {
+export function messengerFetch(groupName) {
   return dispatch => {
-    return fetch('/api/messages/' + theatreCode, {
+    return fetch('/api/messages/' + groupName, {
       method: 'GET',
       mode: 'cors',
       credientials: 'include',
@@ -46,8 +46,8 @@ export function messengerFetchSuccess(data) {
   return { type: MESSENGER_FETCH_SUCCESS, data: data };
 }
 
-export function messengerSubscribe(viewerId, theatreCode, callback) {
-  return { type: MESSENGER_SUBSCRIBE, viewerId: viewerId, theatreCode: theatreCode, callback: callback };
+export function messengerSubscribe(userId, groupName, callback) {
+  return { type: MESSENGER_SUBSCRIBE, userId: userId, groupName: groupName, callback: callback };
 }
 
 export function messengerUnsubscribe() {

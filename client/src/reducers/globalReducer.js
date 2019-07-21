@@ -38,7 +38,7 @@ export default function global(state = initialState.global, action) {
       newMessages = [];
       for (const message of action.data){
         newMessages.push({
-          viewerName: message.first_name + " " + message.last_name,
+          userName: message.first_name + " " + message.last_name,
           content: message.content,
         })
       }
@@ -48,8 +48,8 @@ export default function global(state = initialState.global, action) {
       }
       return newState;
     case MESSENGER_SUBSCRIBE:
-      const connection = state.connection || new webSocketConnection(action.viewerId, action.callback, MESSAGE_TYPE);
-      connection.openNewTheatre(action.theatreCode);
+      const connection = state.connection || new webSocketConnection(action.userId, action.callback, MESSAGE_TYPE);
+      connection.openNewGroup(action.groupName);
       newState = {
         ...state,
         connection: connection,
@@ -71,7 +71,7 @@ export default function global(state = initialState.global, action) {
       }
       newMessages = state.messages;
       newMessages.push({
-        viewerName: action.data.viewer.first_name + " " + action.data.viewer.last_name,
+        userName: action.data.user.first_name + " " + action.data.user.last_name,
         content: action.data.content,
       })
       newState = {
@@ -80,7 +80,7 @@ export default function global(state = initialState.global, action) {
       }
       return newState;
     case MESSENGER_BROADCAST:
-      state.connection.message(action.data.message, action.data.theatreCode);
+      state.connection.message(action.data.message, action.data.groupName);
       return state;
     default:
       return state;

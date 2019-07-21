@@ -4,17 +4,16 @@ const BASE_URL = window.location.hostname === "localhost" ? "localhost:3001" : w
 const ACCESS_TOKEN = "accessToken";
 const CLIENT = "client";
 
-export const COMMAND_TYPE = "COMMAND";
 export const MESSAGE_TYPE = "MESSAGE";
 
-function webSocketConnection(viewerId, callback, connectionType) {
+function webSocketConnection(userId, callback, connectionType) {
   let accessToken = localStorage.getItem(ACCESS_TOKEN);
   let client = localStorage.getItem(CLIENT);
 
   var wsUrl = 'ws://' + BASE_URL + '/cable';
   wsUrl += '?access-token=' + accessToken + '&client=' + client;
 
-  this.viewerId = viewerId;
+  this.userId = userId;
   this.callback = callback;
   this.connectionType = connectionType;
 
@@ -22,29 +21,20 @@ function webSocketConnection(viewerId, callback, connectionType) {
   this.webSocketConnections = {};
 }
 
-webSocketConnection.prototype.command = function(videoId, seekSeconds, state, theatreCode) {
-  let theatreConnObj = this.webSocketConnections[theatreCode];
-  if (theatreConnObj) {
-    theatreConnObj.broadcastCommand(videoId, seekSeconds, state);
+webSocketConnection.prototype.message = function(content, groupName) {
+  let groupConnObj = this.webSocketConnections[groupName];
+  if (groupConnObj) {
+    groupConnObj.broadcastMessage(content);
   } else {
-    console.log('Error: Cannot find theatre connection');
+    console.log('Error: Cannot find group connection');
   }
 }
 
-webSocketConnection.prototype.message = function(content, theatreCode) {
-  let theatreConnObj = this.webSocketConnections[theatreCode];
-  if (theatreConnObj) {
-    theatreConnObj.broadcastMessage(content);
+webSocketConnection.prototype.openNewGroup = function(groupName) {
+  if (groupName !== undefined && !(groupName in this.webSocketConnections)) {
+    this.webSocketConnections[groupName] = this.createWebSocketConnection(groupName);
   } else {
-    console.log('Error: Cannot find theatre connection');
-  }
-}
-
-webSocketConnection.prototype.openNewTheatre = function(theatreCode) {
-  if (theatreCode !== undefined && !(theatreCode in this.webSocketConnections)) {
-    this.webSocketConnections[theatreCode] = this.createWebSocketConnection(theatreCode);
-  } else {
-    this.webSocketConnections[theatreCode].consumer.connect();
+    this.webSocketConnections[groupName].consumer.connect();
   }
 }
 
@@ -54,44 +44,32 @@ webSocketConnection.prototype.disconnect = function() {
   });
 }
 
-webSocketConnection.prototype.createWebSocketConnection = function(theatreCode) {
+webSocketConnection.prototype.createWebSocketConnection = function(groupName) {
   let scope = this;
   let connectionType;
   switch(scope.connectionType) {
-    case COMMAND_TYPE:
-      connectionType = "Player";
-      break;
     case MESSAGE_TYPE:
       connectionType = "Messenger";
       break;
     default:
       connectionType = undefined;
   }
-  return this.connection.subscriptions.create({channel: 'TheatreChannel', theatre_code: theatreCode, viewer_id: scope.viewerId}, {
+  return this.connection.subscriptions.create({channel: 'channel', group_name: groupName, user_id: scope.userId}, {
     connected: function() {
-      console.log(connectionType + ' connected to TheatreChannel. Theatre code: ' + theatreCode + '.')
+      console.log(connectionType + ' connected to channel. Group: ' + groupName + '.')
     },
     disconnected: function() {
-      console.log(connectionType +  ' disconnected from TheatreChannel. Theatre code: ' + theatreCode + '.')
+      console.log(connectionType +  ' disconnected from channel. Group: ' + groupName + '.')
     },
     received: function(data) {
-      if (data.audience.indexOf(scope.viewerId) !== -1) {
+      if (data.audience.indexOf(scope.userId) !== -1) {
         return scope.callback(data)
       }
     },
-    broadcastCommand: function(videoId, seekSeconds, state) {
-      return this.perform('broadcast_command', {
-        theatre_code: theatreCode,
-        video_id: videoId,
-        seek_seconds: seekSeconds,
-        state: state,
-        viewer_id: scope.viewerId
-      })
-    },
     broadcastMessage: function(content) {
       return this.perform('broadcast_message', {
-        theatre_code: theatreCode,
-        viewer_id: scope.viewerId,
+        group_name: groupName,
+        user_id: scope.userId,
         content: content
       })
     }
