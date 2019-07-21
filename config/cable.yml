@@ -6,5 +6,5 @@ test:
 
 production:
   adapter: redis
-  url: redis://redistogo:1de0a3d779a997d5c9f2b76df12635a0@tarpon.redistogo.com:10676/
+  url: # REDISTOGO_URL
   channel_prefix: boilerplate_production
