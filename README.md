@@ -4,34 +4,11 @@ This repo serves as a boilerplate for Rails 5 API + PostgreSQL + Redis + Create 
 
 ## Getting started
 
-First you must set up Rails Credentials for Omniauth, run:
-
 ``` shell
 cd boilerplate
-EDITOR="code --wait" bin/rails credentials:edit
-```
-
-In this editor, you must setup your secrets like so:
-
-``` yml
-google:
-
-  # Get these by creating a Google OAuth Client ID
-  client_id:
-  client_secret:
-```
-
-Then, start the server and client locally:
-
-``` shell
-cd boilerplate
-bundle
-cd client
-yarn install
-cd ..
-rake db:migrate
-rake db:seed
-rake start
+rake setup:credentials
+rake setup:install
+rake setup:db
 ```
 
 Once you're ready to deploy to [Heroku](https://www.heroku.com), run:
