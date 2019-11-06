@@ -1,6 +1,7 @@
 {
   "name": "react-redux-realworld-example-app",
   "version": "0.1.0",
+  "license": "MIT",
   "proxy": "http://localhost:3001",
   "main": "dist/index.js",
   "devDependencies": {
