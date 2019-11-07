@@ -21,4 +21,9 @@ namespace :setup do
   task :db do
     exec 'rake db:reset db:migrate db:seed'
   end
+
+  desc 'Builds Heroku deploy infrastructure'
+  task :heroku do
+    exec 'heroku apps:create && heroku buildpacks:add heroku/nodejs --index 1 && heroku buildpacks:add heroku/ruby --index 2 && heroku config:set RAILS_MASTER_KEY="$(< config/master.key)"'
+  end
 end

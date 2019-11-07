@@ -11,13 +11,12 @@ rake setup:install
 rake setup:db
 ```
 
+### Deployment
+
 Once you're ready to deploy to [Heroku](https://www.heroku.com), run:
 
 ``` shell
-heroku apps:create
-heroku buildpacks:add heroku/nodejs --index 1
-heroku buildpacks:add heroku/ruby --index 2
-heroku config:set RAILS_MASTER_KEY="$(< config/master.key)"
+rake setup:heroku
 git push heroku master
 heroku run rake db:seed
 heroku open
