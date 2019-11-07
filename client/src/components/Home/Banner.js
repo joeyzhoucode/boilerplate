@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Banner = ({ appName, token }) => {
-  if (token) {
+const Banner = ({ appName, currentUser }) => {
+  if (currentUser) {
     return null;
   }
   return (

@@ -15,7 +15,7 @@ const Promise = global.Promise;
 const mapStateToProps = state => ({
   ...state.home,
   appName: state.common.appName,
-  token: state.common.token
+  currentUser: state.common.currentUser
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -29,8 +29,8 @@ const mapDispatchToProps = dispatch => ({
 
 class Home extends React.Component {
   componentWillMount() {
-    const tab = this.props.token ? 'feed' : 'all';
-    const articlesPromise = this.props.token ?
+    const tab = this.props.currentUser ? 'feed' : 'all';
+    const articlesPromise = this.props.currentUser ?
       agent.Articles.feed :
       agent.Articles.all;
 
@@ -45,7 +45,7 @@ class Home extends React.Component {
     return (
       <div className="home-page">
 
-        <Banner token={this.props.token} appName={this.props.appName} />
+        <Banner currentUser={this.props.currentUser} appName={this.props.appName} />
 
         <div className="container page">
           <div className="row">

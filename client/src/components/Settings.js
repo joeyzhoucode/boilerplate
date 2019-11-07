@@ -4,8 +4,7 @@ import agent from '../agent';
 import { connect } from 'react-redux';
 import {
   SETTINGS_SAVED,
-  SETTINGS_PAGE_UNLOADED,
-  LOGOUT
+  SETTINGS_PAGE_UNLOADED
 } from '../constants/actionTypes';
 
 class SettingsForm extends React.Component {
@@ -130,7 +129,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onClickLogout: () => dispatch({ type: LOGOUT }),
   onSubmitForm: user =>
     dispatch({ type: SETTINGS_SAVED, payload: agent.Auth.save(user) }),
   onUnload: () => dispatch({ type: SETTINGS_PAGE_UNLOADED })
@@ -156,7 +154,7 @@ class Settings extends React.Component {
 
               <button
                 className="btn btn-outline-danger"
-                onClick={this.props.onClickLogout}>
+                >
                 Or click here to logout.
               </button>
 

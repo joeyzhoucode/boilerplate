@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { CHANGE_TAB } from '../../constants/actionTypes';
 
 const YourFeedTab = props => {
-  if (props.token) {
+  if (props.currentUser) {
     const clickHandler = ev => {
       ev.preventDefault();
       props.onTabClick('feed', agent.Articles.feed, agent.Articles.feed());
@@ -58,7 +58,7 @@ const TagFilterTab = props => {
 const mapStateToProps = state => ({
   ...state.articleList,
   tags: state.home.tags,
-  token: state.common.token
+  currentUser: state.common.currentUser
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -72,7 +72,7 @@ const MainView = props => {
         <ul className="nav nav-pills outline-active">
 
           <YourFeedTab
-            token={props.token}
+            currentUser={props.currentUser}
             tab={props.tab}
             onTabClick={props.onTabClick} />
 
