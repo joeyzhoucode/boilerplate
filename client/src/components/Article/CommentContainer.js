@@ -22,7 +22,7 @@ const CommentContainer = props => {
     return (
       <div className="col-xs-12 col-md-8 offset-md-2">
         <p>
-          <Link to="/login">Sign in</Link>
+          <a href="/login">Sign in</a>
           &nbsp;to add comments on this article.
         </p>
 

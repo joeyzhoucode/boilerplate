@@ -24,7 +24,7 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         appLoaded: true,
-        currentUser: action.payload ? action.payload.first_name + " " + action.payload.last_name : null
+        currentUser: action.payload.first_name && action.payload.last_name ? `${action.payload.first_name} ${action.payload.last_name}` : null
       };
     case REDIRECT:
       return { ...state, redirectTo: null };

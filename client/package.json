@@ -7,7 +7,6 @@
   "dependencies": {
     "history": "^4.6.3",
     "marked": "^0.3.6",
-    "prop-types": "^15.5.10",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
     "react-redux": "^5.0.7",
@@ -17,9 +16,7 @@
     "react-scripts": "^3.2.0",
     "redux": "^3.6.0",
     "redux-devtools-extension": "^2.13.2",
-    "redux-logger": "^3.0.1",
-    "superagent": "^3.8.2",
-    "superagent-promise": "^1.1.0"
+    "redux-logger": "^3.0.1"
   },
   "devDependencies": {
     "cross-env": "^5.1.4"
