@@ -2,6 +2,7 @@ import ListErrors from './ListErrors';
 import React from 'react';
 import agent from '../agent';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   SETTINGS_SAVED,
   SETTINGS_PAGE_UNLOADED
@@ -152,11 +153,12 @@ class Settings extends React.Component {
 
               <hr />
 
-              <button
+              <Link
                 className="btn btn-outline-danger"
+                to="/logout"
                 >
                 Or click here to logout.
-              </button>
+              </Link>
 
             </div>
           </div>

@@ -1,22 +1,27 @@
-import superagentPromise from 'superagent-promise';
-import _superagent from 'superagent';
-
-const superagent = superagentPromise(_superagent, global.Promise);
-
 const API_ROOT = window.location.origin + "/api";
 
 const encode = encodeURIComponent;
-const responseBody = res => res.body;
+const responseJSON = res => res.json();
 
 const requests = {
   del: url =>
-    superagent.del(`${API_ROOT}${url}`).then(responseBody),
+    fetch(`${API_ROOT}${url}`, {
+      method: 'DELETE',
+    }).then(responseJSON),
   get: url =>
-    superagent.get(`${API_ROOT}${url}`).then(responseBody),
+    fetch(`${API_ROOT}${url}`, {
+      method: 'GET',
+    }).then(responseJSON),
   put: (url, body) =>
-    superagent.put(`${API_ROOT}${url}`, body).then(responseBody),
+    fetch(`${API_ROOT}${url}`, {
+      method: 'PUT',
+      body: body,
+    }).then(responseJSON),
   post: (url, body) =>
-    superagent.post(`${API_ROOT}${url}`, body).then(responseBody)
+    fetch(`${API_ROOT}${url}`, {
+      method: 'POST',
+      body: body,
+    }).then(responseJSON),
 };
 
 const Auth = {

@@ -50,9 +50,9 @@ export default (state = {}, action) => {
       return {
         ...state,
         pager: action.pager,
-        tags: [], // action.payload[0].tags,
-        articles: [], // action.payload[1].articles,
-        articlesCount: 0, // action.payload[1].articlesCount,
+        tags: action.payload.length ? action.payload[0].tags : [],
+        articles: action.payload.length ? action.payload[1].articles : [],
+        articlesCount: action.payload.length ?  action.payload[1].articlesCount : 0,
         currentPage: 0,
         tab: action.tab
       };
@@ -73,8 +73,8 @@ export default (state = {}, action) => {
       return {
         ...state,
         pager: action.pager,
-        articles: [], // action.payload[1].articles,
-        articlesCount: 0, // action.payload[1].articlesCount,
+        articles: action.payload.length ? action.payload[1].articles : [],
+        articlesCount: action.payload.length ? action.payload[1].articlesCount : 0,
         currentPage: 0
       };
     case PROFILE_PAGE_UNLOADED:

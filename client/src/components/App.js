@@ -31,14 +31,13 @@ const mapDispatchToProps = dispatch => ({
 class App extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.redirectTo) {
-      // this.context.router.replace(nextProps.redirectTo);
       store.dispatch(push(nextProps.redirectTo));
       this.props.onRedirect();
     }
   }
 
   componentWillMount() {
-    this.props.onLoad(agent.Auth.current());
+    agent.Auth.current().then(response => this.props.onLoad(response));
   }
 
   render() {
