@@ -20,13 +20,13 @@ class SessionsController < ApplicationController
     user.google_refresh_token = refresh_token if refresh_token.present?
     user.save
 
-    redirect_to '/home'
+    redirect_to '/'
   end
 
   def destroy
     session.delete(:user_id)
     cookies.delete(:user_id)
 
-    redirect_to '/home'
+    redirect_to '/'
   end
 end
