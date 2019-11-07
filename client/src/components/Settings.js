@@ -153,12 +153,12 @@ class Settings extends React.Component {
 
               <hr />
 
-              <Link
+              <a
                 className="btn btn-outline-danger"
-                to="/logout"
+                href="/logout"
                 >
                 Or click here to logout.
-              </Link>
+              </a>
 
             </div>
           </div>
