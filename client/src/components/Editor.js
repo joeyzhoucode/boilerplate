@@ -22,8 +22,11 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: EDITOR_PAGE_LOADED, payload }),
   onRemoveTag: tag =>
     dispatch({ type: REMOVE_TAG, tag }),
-  onSubmit: payload =>
-    dispatch({ type: ARTICLE_SUBMITTED, payload }),
+  onSubmit: payload => {
+    debugger;
+    dispatch({ type: ARTICLE_SUBMITTED, payload })
+  },
+    
   onUnload: payload =>
     dispatch({ type: EDITOR_PAGE_UNLOADED }),
   onUpdateField: (key, value) =>
@@ -70,7 +73,7 @@ class Editor extends React.Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(nextProps) {
     if (this.props.match.params.slug !== nextProps.match.params.slug) {
       if (nextProps.match.params.slug) {
         this.props.onUnload();
@@ -81,7 +84,7 @@ class Editor extends React.Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (this.props.match.params.slug) {
       const promise = agent.Articles.get(this.props.match.params.slug);
       promise.then(response => this.props.onLoad(response));

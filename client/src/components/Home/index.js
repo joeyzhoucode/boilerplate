@@ -28,7 +28,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Home extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const tab = this.props.currentUser ? 'feed' : 'all';
     const articlesPromise = this.props.currentUser ?
       agent.Articles.feed :

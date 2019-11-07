@@ -28,7 +28,7 @@ class ArticlesController < ApplicationController
     @article.user = User.find(session[:user_id])
 
     if @article.save
-      render json: @article
+      render json: { article: @article }
     else
       render json: { errors: @article.errors }, status: :unprocessable_entity
     end
@@ -44,7 +44,7 @@ class ArticlesController < ApplicationController
     if @article.user_id == session[:user_id]
       @article.update_attributes(article_params)
 
-      render json: @article
+      render json: { article: @article }
     else
       render json: { errors: { article: ['not owned by user'] } }, status: :forbidden
     end
