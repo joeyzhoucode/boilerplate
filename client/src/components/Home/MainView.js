@@ -62,7 +62,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onTabClick: (tab, pager, payload) => dispatch({ type: CHANGE_TAB, tab, pager, payload })
+  onTabClick: (tab, payload) => dispatch({ type: CHANGE_TAB, tab, payload })
 });
 
 const MainView = props => {
@@ -84,7 +84,6 @@ const MainView = props => {
       </div>
 
       <ArticleList
-        pager={props.pager}
         articles={props.articles}
         loading={props.loading}
         articlesCount={props.articlesCount}

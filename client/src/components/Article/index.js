@@ -20,10 +20,11 @@ const mapDispatchToProps = dispatch => ({
 
 class Article extends React.Component {
   componentWillMount() {
-    this.props.onLoad(Promise.all([
+    const promise = Promise.all([
       agent.Articles.get(this.props.match.params.id),
       agent.Comments.forArticle(this.props.match.params.id)
-    ]));
+    ]);
+    promise.then(response => this.props.onLoad(response));
   }
 
   componentWillUnmount() {

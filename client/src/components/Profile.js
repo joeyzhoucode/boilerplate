@@ -76,10 +76,11 @@ const mapDispatchToProps = dispatch => ({
 
 class Profile extends React.Component {
   componentWillMount() {
-    this.props.onLoad(Promise.all([
+    const promise = Promise.all([
       agent.Profile.get(this.props.match.params.username),
       agent.Articles.byAuthor(this.props.match.params.username)
-    ]));
+    ]);
+    promise.then(response => this.props.onLoad(response));
   }
 
   componentWillUnmount() {
@@ -152,7 +153,6 @@ class Profile extends React.Component {
               </div>
 
               <ArticleList
-                pager={this.props.pager}
                 articles={this.props.articles}
                 articlesCount={this.props.articlesCount}
                 state={this.props.currentPage} />

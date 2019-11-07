@@ -12,6 +12,8 @@ gem 'rack-cors'
 
 gem 'omniauth-google-oauth2'
 gem 'faker'
+gem 'acts-as-taggable-on', '~> 6.0'
+gem 'acts_as_follower', github: 'tcocca/acts_as_follower', branch: 'master'
 
 group :development, :test do
   gem 'byebug'

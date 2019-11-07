@@ -12,11 +12,22 @@ Rails.application.routes.draw do
   end
 
   scope '/api' do
-    get 'user', to: 'users#show'
     get 'groups/new', to: 'groups#new'
     resources :groups
-    resources :users
+    resource :user, only: [:show, :update]
     resources :messages
+
+    resources :profiles, param: :username, only: [:show] do
+      resource :follow, only: [:create, :destroy]
+    end
+
+    resources :articles, param: :slug, except: [:edit, :new] do
+      resource :favorite, only: [:create, :destroy]
+      resources :comments, only: [:create, :index, :destroy]
+      get :feed, on: :collection
+    end
+
+    resources :tags, only: [:index]
   end
 
   get '*path', to: "application#index", constraints: ->(request) do

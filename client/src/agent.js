@@ -15,12 +15,22 @@ const requests = {
   put: (url, body) =>
     fetch(`${API_ROOT}${url}`, {
       method: 'PUT',
-      body: body,
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body),
     }).then(responseJSON),
   post: (url, body) =>
     fetch(`${API_ROOT}${url}`, {
       method: 'POST',
-      body: body,
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body),
     }).then(responseJSON),
 };
 

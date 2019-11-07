@@ -58,7 +58,7 @@ class Editor extends React.Component {
         title: this.props.title,
         description: this.props.description,
         body: this.props.body,
-        tagList: this.props.tagList
+        tag_list: this.props.tagList
       };
 
       const slug = { slug: this.props.articleSlug };
@@ -66,7 +66,7 @@ class Editor extends React.Component {
         agent.Articles.update(Object.assign(article, slug)) :
         agent.Articles.create(article);
 
-      this.props.onSubmit(promise);
+      promise.then(response => this.props.onSubmit(response));
     };
   }
 
@@ -74,7 +74,8 @@ class Editor extends React.Component {
     if (this.props.match.params.slug !== nextProps.match.params.slug) {
       if (nextProps.match.params.slug) {
         this.props.onUnload();
-        return this.props.onLoad(agent.Articles.get(this.props.match.params.slug));
+        const promise = agent.Articles.get(this.props.match.params.slug);
+        return promise.then(response => this.props.onLoad(response));
       }
       this.props.onLoad(null);
     }
@@ -82,7 +83,8 @@ class Editor extends React.Component {
 
   componentWillMount() {
     if (this.props.match.params.slug) {
-      return this.props.onLoad(agent.Articles.get(this.props.match.params.slug));
+      const promise = agent.Articles.get(this.props.match.params.slug);
+      promise.then(response => this.props.onLoad(response));
     }
     this.props.onLoad(null);
   }
