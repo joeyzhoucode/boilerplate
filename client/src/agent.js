@@ -1,7 +1,9 @@
 const API_ROOT = window.location.origin + "/api";
 
 const encode = encodeURIComponent;
-const responseJSON = res => res.json();
+const responseJSON = res => {
+  if (res.ok) return res.json();
+}
 
 const requests = {
   del: url =>

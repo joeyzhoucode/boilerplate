@@ -27,7 +27,7 @@ class ArticlesController < ApplicationController
     @article.user = User.find(session[:user_id])
 
     if @article.save
-      render json: { article: @article }
+      render json: { article: @article.as_json }
     else
       render json: { errors: @article.errors }, status: :unprocessable_entity
     end
