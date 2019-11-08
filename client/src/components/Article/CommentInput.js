@@ -43,7 +43,7 @@ class CommentInput extends React.Component {
           <img
             src={this.props.currentUser.image}
             className="comment-author-img"
-            alt={this.props.currentUser.username} />
+            alt={`${this.props.currentUser.first_name} ${this.props.currentUser.last_name}`} />
           <button
             className="btn btn-sm btn-primary"
             type="submit">

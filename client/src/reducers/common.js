@@ -24,7 +24,7 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         appLoaded: true,
-        currentUser: action.payload.user ? action.payload.user.id : null
+        currentUser: action.payload.user ? action.payload.user : null
       };
     case REDIRECT:
       return { ...state, redirectTo: null };

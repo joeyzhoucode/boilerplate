@@ -37,7 +37,7 @@ class Article extends React.Component {
 
     const markup = { __html: marked(this.props.article.body, { sanitize: true }) };
     const canModify = this.props.currentUser &&
-      this.props.currentUser.username === this.props.article.user.id;
+      this.props.currentUser.id === this.props.article.user.id;
     return (
       <div className="article-page">
 
