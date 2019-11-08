@@ -17,10 +17,9 @@ const mapDispatchToProps = dispatch => ({
 
 class ProfileFavorites extends Profile {
   componentDidMount() {
-    const promise = Promise.all([
-      agent.Profile.get(this.props.match.params.username),
-      agent.Articles.favoritedBy(this.props.match.params.username)]);
-    promise.then(response => this.props.onLoad(response));
+    const profilePromise = agent.Profile.get(this.props.match.params.username);
+    const articlesPromise = agent.Articles.favoritedBy(this.props.match.params.username);  
+    Promise.all([profilePromise, articlesPromise]).then(response => this.props.onLoad(response));
   }
 
   componentWillUnmount() {

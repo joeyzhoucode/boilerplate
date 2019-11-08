@@ -76,11 +76,9 @@ const mapDispatchToProps = dispatch => ({
 
 class Profile extends React.Component {
   componentDidMount() {
-    const promise = Promise.all([
-      agent.Profile.get(this.props.match.params.username),
-      agent.Articles.byAuthor(this.props.match.params.username)
-    ]);
-    promise.then(response => this.props.onLoad(response));
+    const profilePromise = agent.Profile.get(this.props.match.params.username);
+    const articlesPromise = agent.Articles.byAuthor(this.props.match.params.username);
+    Promise.all([profilePromise, articlesPromise]).then(response => this.props.onLoad(response));
   }
 
   componentWillUnmount() {

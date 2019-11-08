@@ -31,10 +31,10 @@ class Home extends React.Component {
   componentDidMount() {
     const tab = this.props.currentUser ? 'feed' : 'all';
     const articlesPromise = this.props.currentUser ?
-      agent.Articles.feed :
-      agent.Articles.all;
-    const tagsPromise = agent.Tags.getAll;
-    const promise = Promise.all([tagsPromise(), articlesPromise()]);
+      agent.Articles.feed() :
+      agent.Articles.all();
+    const tagsPromise = agent.Tags.getAll();
+    const promise = Promise.all([tagsPromise, articlesPromise]);
 
     promise.then(response => this.props.onLoad(tab, response));
   }

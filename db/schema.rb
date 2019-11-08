@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_19_025635) do
+ActiveRecord::Schema.define(version: 2019_08_12_061614) do
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
@@ -45,10 +45,10 @@ ActiveRecord::Schema.define(version: 2019_07_19_025635) do
   end
 
   create_table "follows", force: :cascade do |t|
-    t.integer "followable_id", null: false
     t.string "followable_type", null: false
-    t.integer "follower_id", null: false
+    t.integer "followable_id", null: false
     t.string "follower_type", null: false
+    t.integer "follower_id", null: false
     t.boolean "blocked", default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -82,10 +82,10 @@ ActiveRecord::Schema.define(version: 2019_07_19_025635) do
 
   create_table "taggings", force: :cascade do |t|
     t.integer "tag_id"
-    t.integer "taggable_id"
     t.string "taggable_type"
-    t.integer "tagger_id"
+    t.integer "taggable_id"
     t.string "tagger_type"
+    t.integer "tagger_id"
     t.string "context", limit: 128
     t.datetime "created_at"
     t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
