@@ -28,7 +28,7 @@ const ArticleList = props => {
       }
 
       <ListPagination
-        articlesCount={props.articlesCount}
+        articles_count={props.articles_count}
         currentPage={props.currentPage} />
     </div>
   );

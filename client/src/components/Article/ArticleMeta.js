@@ -6,16 +6,16 @@ const ArticleMeta = props => {
   const article = props.article;
   return (
     <div className="article-meta">
-      <Link to={`/@${article.author.username}`}>
-        <img src={article.author.image} alt={article.author.username} />
+      <Link to={`/@${article.user.id}`}>
+        <img src={article.user.image} alt={article.user.id} />
       </Link>
 
       <div className="info">
-        <Link to={`/@${article.author.username}`} className="author">
-          {article.author.username}
+        <Link to={`/@${article.user.id}`} className="author">
+          {`${article.user.first_name} ${article.user.last_name}`}
         </Link>
         <span className="date">
-          {new Date(article.createdAt).toDateString()}
+          {new Date(article.created_at).toDateString()}
         </span>
       </div>
 

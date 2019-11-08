@@ -32,26 +32,25 @@ const ArticlePreview = props => {
       props.favorite(article.slug);
     }
   };
-
   return (
     <div className="article-preview">
       <div className="article-meta">
-        <Link to={`/@${article.author.username}`}>
-          <img src={article.author.image} alt={article.author.username} />
+        <Link to={`/@${article.user.id}`}>
+          <img src={article.user.image} alt={article.user.id} />
         </Link>
 
         <div className="info">
-          <Link className="author" to={`/@${article.author.username}`}>
-            {article.author.username}
+          <Link className="author" to={`/@${article.user.id}`}>
+            {`${article.user.first_name} ${article.user.last_name}`}
           </Link>
           <span className="date">
-            {new Date(article.createdAt).toDateString()}
+            {new Date(article.created_at).toDateString()}
           </span>
         </div>
 
         <div className="pull-xs-right">
           <button className={favoriteButtonClass} onClick={handleClick}>
-            <i className="ion-heart"></i> {article.favoritesCount}
+            <i className="ion-heart"></i> {article.favorites_count}
           </button>
         </div>
       </div>
@@ -62,7 +61,7 @@ const ArticlePreview = props => {
         <span>Read more...</span>
         <ul className="tag-list">
           {
-            article.tagList.map(tag => {
+            article.tag_list.map(tag => {
               return (
                 <li className="tag-default tag-pill tag-outline" key={tag}>
                   {tag}

@@ -23,7 +23,6 @@ const mapDispatchToProps = dispatch => ({
   onRemoveTag: tag =>
     dispatch({ type: REMOVE_TAG, tag }),
   onSubmit: payload => {
-    debugger;
     dispatch({ type: ARTICLE_SUBMITTED, payload })
   },
     
@@ -61,7 +60,7 @@ class Editor extends React.Component {
         title: this.props.title,
         description: this.props.description,
         body: this.props.body,
-        tag_list: this.props.tagList
+        tag_list: this.props.tag_list
       };
 
       const slug = { slug: this.props.articleSlug };
@@ -147,7 +146,7 @@ class Editor extends React.Component {
 
                     <div className="tag-list">
                       {
-                        (this.props.tagList || []).map(tag => {
+                        (this.props.tag_list || []).map(tag => {
                           return (
                             <span className="tag-default tag-pill" key={tag}>
                               <i  className="ion-close-round"

@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   def index
     @articles = Article.all.includes(:user)
+    @articles = @articles.order(created_at: :desc).offset(params[:offset] || 0).limit(params[:limit] || 20)
 
     @articles = @articles.tagged_with(params[:tag]) if params[:tag].present?
     @articles = @articles.authored_by(params[:author]) if params[:author].present?
@@ -8,9 +9,7 @@ class ArticlesController < ApplicationController
 
     @articles_count = @articles.count
 
-    @articles = @articles.order(created_at: :desc).offset(params[:offset] || 0).limit(params[:limit] || 20)
-    
-    render json: @articles
+    render json: { articles: @articles.as_json, articles_count: @articles_count }
   end
 
   def feed
@@ -20,7 +19,7 @@ class ArticlesController < ApplicationController
 
     @articles = @articles.order(created_at: :desc).offset(params[:offset] || 0).limit(params[:limit] || 20)
 
-    render json: @articles
+    render json: { articles: @articles.as_json, articles_count: @articles_count }
   end
 
   def create
@@ -35,7 +34,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    render json: Article.find_by_slug!(params[:slug])
+    render json: { article: Article.find_by_slug!(params[:slug]) }
   end
 
   def update
@@ -44,7 +43,7 @@ class ArticlesController < ApplicationController
     if @article.user_id == session[:user_id]
       @article.update_attributes(article_params)
 
-      render json: { article: @article }
+      render json: { article: @articles.as_json }
     else
       render json: { errors: { article: ['not owned by user'] } }, status: :forbidden
     end

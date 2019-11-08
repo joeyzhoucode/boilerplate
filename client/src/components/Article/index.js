@@ -38,7 +38,7 @@ class Article extends React.Component {
 
     const markup = { __html: marked(this.props.article.body, { sanitize: true }) };
     const canModify = this.props.currentUser &&
-      this.props.currentUser.username === this.props.article.author.username;
+      this.props.currentUser.username === this.props.article.user.id;
     return (
       <div className="article-page">
 
@@ -62,7 +62,7 @@ class Article extends React.Component {
 
               <ul className="tag-list">
                 {
-                  this.props.article.tagList.map(tag => {
+                  this.props.article.tag_list.map(tag => {
                     return (
                       <li
                         className="tag-default tag-pill tag-outline"

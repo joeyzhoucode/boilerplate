@@ -27,7 +27,8 @@ const YourFeedTab = props => {
 const GlobalFeedTab = props => {
   const clickHandler = ev => {
     ev.preventDefault();
-    props.onTabClick('all', agent.Articles.all, agent.Articles.all());
+    const articlesPromise = agent.Articles.all();
+    articlesPromise.then(response => props.onTabClick('all', response));
   };
   return (
     <li className="nav-item">
@@ -85,7 +86,7 @@ const MainView = props => {
       <ArticleList
         articles={props.articles}
         loading={props.loading}
-        articlesCount={props.articlesCount}
+        articles_count={props.articles_count}
         currentPage={props.currentPage} />
     </div>
   );

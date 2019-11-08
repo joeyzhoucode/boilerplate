@@ -33,14 +33,14 @@ export default (state = {}, action) => {
       return {
         ...state,
         articles: action.payload.articles,
-        articlesCount: action.payload.articlesCount,
+        articles_count: action.payload.articles_count,
         currentPage: action.page
       };
     case APPLY_TAG_FILTER:
       return {
         ...state,
         articles: action.payload.articles,
-        articlesCount: action.payload.articlesCount,
+        articles_count: action.payload.articles_count,
         tab: null,
         tag: action.tag,
         currentPage: 0
@@ -48,9 +48,9 @@ export default (state = {}, action) => {
     case HOME_PAGE_LOADED:
       return {
         ...state,
-        tags: action.payload.length ? action.payload[0].tags : [],
-        articles: action.payload.length ? action.payload[1].articles : [],
-        articlesCount: action.payload.length ?  action.payload[1].articlesCount : 0,
+        tags: action.payload[0].tags,
+        articles: action.payload[1].articles,
+        articles_count: action.payload[1].articles_count,
         currentPage: 0,
         tab: action.tab
       };
@@ -60,7 +60,7 @@ export default (state = {}, action) => {
       return {
         ...state,
         articles: action.payload.articles,
-        articlesCount: action.payload.articlesCount,
+        articles_count: action.payload.articles_count,
         tab: action.tab,
         currentPage: 0,
         tag: null
@@ -69,8 +69,8 @@ export default (state = {}, action) => {
     case PROFILE_FAVORITES_PAGE_LOADED:
       return {
         ...state,
-        articles: action.payload.length ? action.payload[1].articles : [],
-        articlesCount: action.payload.length ? action.payload[1].articlesCount : 0,
+        articles: action.payload[1].articles,
+        articles_count: action.payload[1].articles_count,
         currentPage: 0
       };
     case PROFILE_PAGE_UNLOADED:

@@ -18,7 +18,7 @@ export default (state = {}, action) => {
         description: action.payload ? action.payload.article.description : '',
         body: action.payload ? action.payload.article.body : '',
         tagInput: '',
-        tagList: action.payload ? action.payload.article.tagList : []
+        tag_list: action.payload ? action.payload.article.tag_list : []
       };
     case EDITOR_PAGE_UNLOADED:
       return {};
@@ -36,13 +36,13 @@ export default (state = {}, action) => {
     case ADD_TAG:
       return {
         ...state,
-        tagList: state.tagList.concat([state.tagInput]),
+        tag_list: state.tag_list.concat([state.tagInput]),
         tagInput: ''
       };
     case REMOVE_TAG:
       return {
         ...state,
-        tagList: state.tagList.filter(tag => tag !== action.tag)
+        tag_list: state.tag_list.filter(tag => tag !== action.tag)
       };
     case UPDATE_FIELD_EDITOR:
       return { ...state, [action.key]: action.value };

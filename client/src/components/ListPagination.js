@@ -9,12 +9,12 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const ListPagination = props => {
-  if (props.articlesCount <= 10) {
+  if (props.articles_count <= 10) {
     return null;
   }
 
   const range = [];
-  for (let i = 0; i < Math.ceil(props.articlesCount / 10); ++i) {
+  for (let i = 0; i < Math.ceil(props.articles_count / 10); ++i) {
     range.push(i);
   }
 
