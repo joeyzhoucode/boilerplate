@@ -34,11 +34,11 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    render json: { article: Article.find_by_slug!(params[:slug]) }
+    render json: { article: Article.find_by(slug: params[:slug]) }
   end
 
   def update
-    @article = Article.find_by_slug!(params[:slug])
+    @article = Article.find_by(slug: params[:slug])
 
     if @article.user_id == session[:user_id]
       @article.update_attributes(article_params)
@@ -50,7 +50,7 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article = Article.find_by_slug!(params[:slug])
+    @article = Article.find_by(slug: params[:slug])
 
     if @article.user_id == session[:user_id]
       @article.destroy

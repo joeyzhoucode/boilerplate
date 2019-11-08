@@ -8,13 +8,13 @@ const FAVORITED_CLASS = 'btn btn-sm btn-primary';
 const NOT_FAVORITED_CLASS = 'btn btn-sm btn-outline-primary';
 
 const mapDispatchToProps = dispatch => ({
-  favorite: slug => dispatch({
+  favorite: payload => dispatch({
     type: ARTICLE_FAVORITED,
-    payload: agent.Articles.favorite(slug)
+    payload: payload,
   }),
-  unfavorite: slug => dispatch({
+  unfavorite: payload => dispatch({
     type: ARTICLE_UNFAVORITED,
-    payload: agent.Articles.unfavorite(slug)
+    payload: payload,
   })
 });
 
@@ -27,9 +27,9 @@ const ArticlePreview = props => {
   const handleClick = ev => {
     ev.preventDefault();
     if (article.favorited) {
-      props.unfavorite(article.slug);
+      agent.Articles.unfavorite(article.slug).then(response => props.unfavorite(response));
     } else {
-      props.favorite(article.slug);
+      agent.Articles.favorite(article.slug).then(response => props.favorite(response));
     }
   };
   return (
