@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resource :user, only: [:show, :update]
     resources :messages
 
-    resources :profiles, param: :username, only: [:show] do
+    resources :profiles, param: :user_id, only: [:show] do
       resource :follow, only: [:create, :destroy]
     end
 
