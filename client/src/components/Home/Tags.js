@@ -3,6 +3,7 @@ import agent from '../../agent';
 
 const Tags = props => {
   const tags = props.tags;
+  const page = props.page;
   if (tags) {
     return (
       <div className="tag-list">
@@ -10,7 +11,7 @@ const Tags = props => {
           tags.map(tag => {
             const handleClick = ev => {
               ev.preventDefault();
-              props.onClickTag(tag, page => agent.Articles.byTag(tag, page), agent.Articles.byTag(tag));
+              agent.Articles.byTag(tag, page).then(response => props.onClickTag(tag, response));
             };
 
             return (

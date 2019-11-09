@@ -64,6 +64,7 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
+    puts "++++++++++ #{params[:tag_list]} ++++++++++"
     params.require(:article).permit(:title, :body, :description, tag_list: [])
   end
 end
