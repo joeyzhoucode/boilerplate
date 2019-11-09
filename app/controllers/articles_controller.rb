@@ -41,7 +41,7 @@ class ArticlesController < ApplicationController
     if @article.user_id == session[:user_id]
       @article.update_attributes(article_params)
 
-      render json: { article: @articles.as_json }
+      render json: { article: @article.as_json }
     else
       render json: { errors: { article: ['not owned by user'] } }, status: :forbidden
     end

@@ -22,9 +22,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: EDITOR_PAGE_LOADED, payload }),
   onRemoveTag: tag =>
     dispatch({ type: REMOVE_TAG, tag }),
-  onSubmit: payload => {
-    dispatch({ type: ARTICLE_SUBMITTED, payload })
-  },
+  onSubmit: payload =>
+    dispatch({ type: ARTICLE_SUBMITTED, payload }),
     
   onUnload: payload =>
     dispatch({ type: EDITOR_PAGE_UNLOADED }),

@@ -153,7 +153,8 @@ class Profile extends React.Component {
               <ArticleList
                 articles={this.props.articles}
                 articles_count={this.props.articles_count}
-                state={this.props.currentPage} />
+                state={this.props.currentPage}
+                currentUser={this.props.currentUser} />
             </div>
 
           </div>

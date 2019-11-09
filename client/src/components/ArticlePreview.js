@@ -20,13 +20,14 @@ const mapDispatchToProps = dispatch => ({
 
 const ArticlePreview = props => {
   const article = props.article;
-  const favoriteButtonClass = article.favorited ?
+  const favorited = article.favorites.find(f => f.user_id === props.currentUser.id);
+  const favoriteButtonClass = favorited ?
     FAVORITED_CLASS :
     NOT_FAVORITED_CLASS;
 
   const handleClick = ev => {
     ev.preventDefault();
-    if (article.favorited) {
+    if (favorited) {
       agent.Articles.unfavorite(article.slug).then(response => props.unfavorite(response));
     } else {
       agent.Articles.favorite(article.slug).then(response => props.favorite(response));

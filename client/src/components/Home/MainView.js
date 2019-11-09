@@ -87,7 +87,8 @@ const MainView = props => {
         articles={props.articles}
         loading={props.loading}
         articles_count={props.articles_count}
-        currentPage={props.currentPage} />
+        currentPage={props.currentPage}
+        currentUser={props.currentUser} />
     </div>
   );
 };

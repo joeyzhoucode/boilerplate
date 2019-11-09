@@ -22,7 +22,7 @@ export default (state = {}, action) => {
           if (article.slug === action.payload.article.slug) {
             return {
               ...article,
-              favorited: action.payload.article.favorited,
+              favorites: action.payload.article.favorites,
               favorites_count: action.payload.article.favorites_count
             };
           }

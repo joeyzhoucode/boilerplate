@@ -19,8 +19,6 @@ class Article < ActiveRecord::Base
   end
 
   def as_json(options = {})
-    super(include: [:user]).tap do |hash|
-      hash['favorited'] = self.favorites.where(user: self.user).exists?
-    end
+    super(include: [:user, :favorites])
   end
 end
