@@ -20,7 +20,9 @@ const mapDispatchToProps = dispatch => ({
 
 const ArticlePreview = props => {
   const article = props.article;
-  const favorited = article.favorites.find(f => f.user_id === props.currentUser.id);
+  const favorited = props.currentUser ?
+    article.favorites.find(f => f.user_id === props.currentUser.id) :
+    null;
   const favoriteButtonClass = favorited ?
     FAVORITED_CLASS :
     NOT_FAVORITED_CLASS;

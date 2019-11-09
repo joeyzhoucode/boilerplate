@@ -28,8 +28,12 @@ const FollowUserButton = props => {
     return null;
   }
 
+  const following = props.user.followers ?
+    props.user.followers.find(f => f.id === props.currentUser.id) :
+    null;
+
   let classes = 'btn btn-sm action-btn';
-  if (props.user.following) {
+  if (following) {
     classes += ' btn-secondary';
   } else {
     classes += ' btn-outline-secondary';
@@ -37,10 +41,10 @@ const FollowUserButton = props => {
 
   const handleClick = ev => {
     ev.preventDefault();
-    if (props.user.following) {
-      props.unfollow(props.user.username)
+    if (following) {
+      agent.Profile.unfollow(props.user.id).then(response => props.unfollow(response));
     } else {
-      props.follow(props.user.username)
+      agent.Profile.follow(props.user.id).then(response => props.follow(response));
     }
   };
 
@@ -50,7 +54,7 @@ const FollowUserButton = props => {
       onClick={handleClick}>
       <i className="ion-plus-round"></i>
       &nbsp;
-      {props.user.following ? 'Unfollow' : 'Follow'} {props.user.username}
+      {following ? 'Unfollow' : 'Follow'} {props.user.first_name}
     </button>
   );
 };
@@ -62,22 +66,16 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onFollow: username => dispatch({
-    type: FOLLOW_USER,
-    payload: agent.Profile.follow(username)
-  }),
+  onFollow: payload => dispatch({ type: FOLLOW_USER, payload: payload }),
   onLoad: payload => dispatch({ type: PROFILE_PAGE_LOADED, payload }),
-  onUnfollow: username => dispatch({
-    type: UNFOLLOW_USER,
-    payload: agent.Profile.unfollow(username)
-  }),
+  onUnfollow: payload => dispatch({ type: UNFOLLOW_USER, payload: payload }),
   onUnload: () => dispatch({ type: PROFILE_PAGE_UNLOADED })
 });
 
 class Profile extends React.Component {
   componentDidMount() {
-    const profilePromise = agent.Profile.get(this.props.match.params.username);
-    const articlesPromise = agent.Articles.byAuthor(this.props.match.params.username);
+    const profilePromise = agent.Profile.get(this.props.match.params.id);
+    const articlesPromise = agent.Articles.byAuthor(this.props.match.params.id);
     Promise.all([profilePromise, articlesPromise]).then(response => this.props.onLoad(response));
   }
 
@@ -109,6 +107,7 @@ class Profile extends React.Component {
 
   render() {
     const profile = this.props.profile;
+    const currentUser = this.props.currentUser;
     if (!profile) {
       return null;
     }
@@ -116,6 +115,8 @@ class Profile extends React.Component {
     const isUser = this.props.currentUser &&
       this.props.profile.id === this.props.currentUser.id;
 
+    const onFollow = this.props.onFollow;
+    const onUnfollow = this.props.onUnfollow;
     return (
       <div className="profile-page">
 
@@ -132,10 +133,10 @@ class Profile extends React.Component {
                 <FollowUserButton
                   isUser={isUser}
                   user={profile}
-                  follow={this.props.onFollow}
-                  unfollow={this.props.onUnfollow}
+                  currentUser={currentUser}
+                  follow={onFollow}
+                  unfollow={onUnfollow}
                   />
-
               </div>
             </div>
           </div>

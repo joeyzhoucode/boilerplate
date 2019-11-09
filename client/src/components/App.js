@@ -53,8 +53,8 @@ class App extends React.Component {
             <Route path="/editor" component={Editor} />
             <Route path="/article/:id" component={Article} />
             <Route path="/settings" component={Settings} />
-            <Route path="/@:username/favorites" component={ProfileFavorites} />
-            <Route path="/@:username" component={Profile} />
+            <Route path="/@:id/favorites" component={ProfileFavorites} />
+            <Route path="/@:id" component={Profile} />
             </Switch>
         </div>
       );
