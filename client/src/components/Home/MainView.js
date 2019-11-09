@@ -8,7 +8,7 @@ const YourFeedTab = props => {
   if (props.currentUser) {
     const clickHandler = ev => {
       ev.preventDefault();
-      props.onTabClick('feed', agent.Articles.feed, agent.Articles.feed());
+      agent.Articles.feed().then(response => props.onTabClick('feed', response));
     }
 
     return (

@@ -33,7 +33,7 @@ class SettingsForm extends React.Component {
         delete user.password;
       }
 
-      this.props.onSubmitForm(user);
+      agent.Auth.save(user).then(response => this.props.onSubmitForm(response));
     };
   }
 
@@ -129,8 +129,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onSubmitForm: user =>
-    dispatch({ type: SETTINGS_SAVED, payload: agent.Auth.save(user) }),
+  onSubmitForm: payload =>
+    dispatch({ type: SETTINGS_SAVED, payload: payload }),
   onUnload: () => dispatch({ type: SETTINGS_PAGE_UNLOADED })
 });
 

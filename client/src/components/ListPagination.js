@@ -19,7 +19,7 @@ const ListPagination = props => {
   }
 
   const setPage = page => {
-    props.onSetPage(page, agent.Articles.all(page))
+    agent.Articles.all(page).then(response => props.onSetPage(page, response));
   };
 
   return (
