@@ -9,10 +9,20 @@ const requests = {
   del: url =>
     fetch(`${API_ROOT}${url}`, {
       method: 'DELETE',
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
     }).then(responseJSON),
   get: url =>
     fetch(`${API_ROOT}${url}`, {
       method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
     }).then(responseJSON),
   put: (url, body) =>
     fetch(`${API_ROOT}${url}`, {

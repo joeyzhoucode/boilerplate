@@ -4,8 +4,6 @@ class ArticlesController < ApplicationController
     @articles = @articles.order(created_at: :desc).offset(params[:offset] || 0).limit(params[:limit] || 20)
 
     @articles = @articles.tagged_with(params[:tag]) if params[:tag].present?
-    @articles = @articles.authored_by(params[:author]) if params[:author].present?
-    @articles = @articles.favorited_by(params[:favorited]) if params[:favorited].present?
 
     @articles_count = @articles.count
 
