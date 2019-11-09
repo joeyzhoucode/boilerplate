@@ -10,8 +10,8 @@ const mapDispatchToProps = dispatch => ({
 
 const DeleteButton = props => {
   const del = () => {
-    const payload = agent.Comments.delete(props.slug, props.commentId);
-    props.onClick(payload, props.commentId);
+    const promise = agent.Comments.delete(props.slug, props.commentId);
+    promise.then(response => props.onClick(response, props.commentId));
   };
 
   if (props.show) {

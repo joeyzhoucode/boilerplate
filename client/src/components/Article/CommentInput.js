@@ -21,10 +21,10 @@ class CommentInput extends React.Component {
 
     this.createComment = ev => {
       ev.preventDefault();
-      const payload = agent.Comments.create(this.props.slug,
+      const promise = agent.Comments.create(this.props.slug,
         { body: this.state.body });
       this.setState({ body: '' });
-      this.props.onSubmit(payload);
+      promise.then(response => this.props.onSubmit(response));
     };
   }
 
@@ -43,7 +43,7 @@ class CommentInput extends React.Component {
           <img
             src={this.props.currentUser.image}
             className="comment-author-img"
-            alt={`${this.props.currentUser.first_name} ${this.props.currentUser.last_name}`} />
+            alt={`${this.props.currentUser.first_name}`} />
           <button
             className="btn btn-sm btn-primary"
             type="submit">

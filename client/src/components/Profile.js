@@ -124,8 +124,8 @@ class Profile extends React.Component {
             <div className="row">
               <div className="col-xs-12 col-md-10 offset-md-1">
 
-                <img src={profile.image} className="user-img" alt={profile.username} />
-                <h4>{profile.username}</h4>
+                <img src={profile.image} className="user-img" alt={`${profile.first_name}`} />
+                <h4>{`${profile.first_name} ${profile.last_name}`}</h4>
                 <p>{profile.bio}</p>
 
                 <EditProfileSettings isUser={isUser} />

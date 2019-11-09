@@ -10,7 +10,11 @@ class CommentsController < ApplicationController
     @comment = @article.comments.new(comment_params)
     @comment.user = User.find(session[:user_id])
 
-    render json: { errors: @comment.errors }, status: :unprocessable_entity unless @comment.save
+    if @comment.save
+      render json: { comment: @comment }
+    else
+      render json: { errors: @comment.errors }, status: :unprocessable_entity 
+    end
   end
 
   def destroy

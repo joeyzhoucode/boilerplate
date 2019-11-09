@@ -15,13 +15,13 @@ const Comment = props => {
         <Link
           to={`/@${comment.user.id}`}
           className="comment-author">
-          <img src={comment.user.image} className="comment-author-img" alt={comment.user.id} />
+          <img src={comment.user.image} className="comment-author-img" alt={`${comment.user.first_name}`} />
         </Link>
         &nbsp;
         <Link
           to={`/@${comment.user.id}`}
           className="comment-author">
-          {comment.user.id}
+          {`${comment.user.first_name} ${comment.user.last_name}`}
         </Link>
         <span className="date-posted">
           {new Date(comment.created_at).toDateString()}
