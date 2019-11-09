@@ -23,7 +23,7 @@ export default (state = {}, action) => {
             return {
               ...article,
               favorited: action.payload.article.favorited,
-              favoritesCount: action.payload.article.favoritesCount
+              favorites_count: action.payload.article.favorites_count
             };
           }
           return article;
