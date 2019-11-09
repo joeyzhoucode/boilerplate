@@ -13,10 +13,7 @@ class SettingsForm extends React.Component {
 
     this.state = {
       image: '',
-      username: '',
       bio: '',
-      email: '',
-      password: ''
     };
 
     this.updateState = field => ev => {
@@ -29,9 +26,6 @@ class SettingsForm extends React.Component {
       ev.preventDefault();
 
       const user = Object.assign({}, this.state);
-      if (!user.password) {
-        delete user.password;
-      }
 
       agent.Auth.save(user).then(response => this.props.onSubmitForm(response));
     };
@@ -41,9 +35,7 @@ class SettingsForm extends React.Component {
     if (this.props.currentUser) {
       Object.assign(this.state, {
         image: this.props.currentUser.image || '',
-        username: this.props.currentUser.id,
-        bio: this.props.currentUser.bio,
-        email: this.props.currentUser.email
+        bio: this.props.currentUser.bio
       });
     }
   }
@@ -52,9 +44,7 @@ class SettingsForm extends React.Component {
     if (nextProps.currentUser) {
       this.setState(Object.assign({}, this.state, {
         image: nextProps.currentUser.image || '',
-        username: nextProps.currentUser.id,
-        bio: nextProps.currentUser.bio,
-        email: nextProps.currentUser.email
+        bio: nextProps.currentUser.bio
       }));
     }
   }
@@ -74,15 +64,6 @@ class SettingsForm extends React.Component {
           </fieldset>
 
           <fieldset className="form-group">
-            <input
-              className="form-control form-control-lg"
-              type="text"
-              placeholder="Username"
-              value={this.state.id}
-              onChange={this.updateState('username')} />
-          </fieldset>
-
-          <fieldset className="form-group">
             <textarea
               className="form-control form-control-lg"
               rows="8"
@@ -90,24 +71,6 @@ class SettingsForm extends React.Component {
               value={this.state.bio}
               onChange={this.updateState('bio')}>
             </textarea>
-          </fieldset>
-
-          <fieldset className="form-group">
-            <input
-              className="form-control form-control-lg"
-              type="email"
-              placeholder="Email"
-              value={this.state.email}
-              onChange={this.updateState('email')} />
-          </fieldset>
-
-          <fieldset className="form-group">
-            <input
-              className="form-control form-control-lg"
-              type="password"
-              placeholder="New Password"
-              value={this.state.password}
-              onChange={this.updateState('password')} />
           </fieldset>
 
           <button
