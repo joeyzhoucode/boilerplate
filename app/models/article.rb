@@ -17,6 +17,9 @@ class Article < ActiveRecord::Base
   end
 
   def as_json(options = {})
-    super(include: [:user, :favorites])
+    super(include: [
+      { user: { except: [:google_token, :google_refresh_token] }},
+      :favorites
+    ])
   end
 end

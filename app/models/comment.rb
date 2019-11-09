@@ -5,6 +5,6 @@ class Comment < ActiveRecord::Base
   validates :body, presence: true, allow_blank: false
 
   def as_json(options = {})
-    super(include: :user)
+    super(include: { user: { except: [:google_token, :google_refresh_token] }})
   end
 end

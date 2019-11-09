@@ -36,6 +36,7 @@ class User < ApplicationRecord
   end
 
   def as_json(options = {})
-    super(include: [:followers])
+    super(include: { followers: { except: [:google_token, :google_refresh_token] }},
+      except: [:google_token, :google_refresh_token])
   end
 end
