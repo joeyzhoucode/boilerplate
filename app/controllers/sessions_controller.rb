@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  include ActionController::Cookies
+
   def new
     redirect_to '/auth/google_oauth2'
   end
@@ -8,7 +10,7 @@ class SessionsController < ApplicationController
     access_token = request.env["omniauth.auth"]
     user = User.from_omniauth(access_token)
     session[:user_id] = user.id
-    # cookies.encrypted[:user_id] = user.id
+    cookies.encrypted[:user_id] = user.id
 
     # Access_token is used to authenticate request made from the rails application to the google server
     user.google_token = access_token.credentials.token
@@ -24,7 +26,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete(:user_id)
-    # cookies.delete(:user_id)
+    cookies.delete(:user_id)
 
     redirect_to '/'
   end
