@@ -6,5 +6,5 @@ test:
 
 production:
   adapter: redis
-  url: # REDISTOGO_URL
+  url: redis://redistogo:c4667d43ce6fa9c5e2534f80576a8161@crestfish.redistogo.com:10285/
   channel_prefix: boilerplate_production

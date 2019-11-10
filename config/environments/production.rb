@@ -83,6 +83,6 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.web_socket_server_url = "wss://boilerplate.xyz/cable"
-  config.action_cable.allowed_request_origins = ['https://boilerplate.xyz', 'http://boilerplate.xyz']
+  config.web_socket_server_url = "wss://limitless-stream-99307.herokuapp.com/cable"
+  config.action_cable.allowed_request_origins = ['https://limitless-stream-99307.herokuapp.com/']
 end

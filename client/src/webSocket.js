@@ -7,10 +7,11 @@ const CLIENT = "client";
 export const MESSAGE_TYPE = "MESSAGE";
 
 function webSocket(callback, connectionType) {
-  let accessToken = localStorage.getItem(ACCESS_TOKEN);
-  let client = localStorage.getItem(CLIENT);
+  const protocol = window.location.protocol === "http:" ? "ws://" : "wss://";
+  const accessToken = localStorage.getItem(ACCESS_TOKEN);
+  const client = localStorage.getItem(CLIENT);
 
-  var wsUrl = 'ws://' + BASE_URL + '/cable';
+  let wsUrl = protocol + BASE_URL + '/cable';
   wsUrl += '?access-token=' + accessToken + '&client=' + client;
 
   this.callback = callback;
