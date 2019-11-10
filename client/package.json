@@ -5,6 +5,7 @@
   "proxy": "http://localhost:3001",
   "main": "dist/index.js",
   "dependencies": {
+    "actioncable": "^5.2.3",
     "history": "^4.6.3",
     "marked": "^0.3.6",
     "react": "^16.3.0",

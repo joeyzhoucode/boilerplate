@@ -93,6 +93,11 @@ const Comments = {
     requests.get(`/articles/${slug}/comments`)
 };
 
+const Messages = {
+  all: page =>
+    requests.get(`/messages?${limit(10, page)}`),
+};
+
 const Profile = {
   follow: id =>
     requests.post(`/profiles/${id}/follow`),
@@ -106,6 +111,7 @@ export default {
   Articles,
   Auth,
   Comments,
+  Messages,
   Profile,
   Tags
 };

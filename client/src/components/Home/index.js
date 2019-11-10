@@ -7,7 +7,10 @@ import { connect } from 'react-redux';
 import {
   HOME_PAGE_LOADED,
   HOME_PAGE_UNLOADED,
-  APPLY_TAG_FILTER
+  APPLY_TAG_FILTER,
+  MESSENGER_LOADED,
+  MESSENGER_UNLOADED,
+  MESSENGER_UPDATE,
 } from '../../constants/actionTypes';
 
 const Promise = global.Promise;
@@ -24,7 +27,13 @@ const mapDispatchToProps = dispatch => ({
   onLoad: (tab, payload) =>
     dispatch({ type: HOME_PAGE_LOADED, tab, payload }),
   onUnload: () =>
-    dispatch({  type: HOME_PAGE_UNLOADED })
+    dispatch({ type: HOME_PAGE_UNLOADED }),
+  onMessengerLoad: (callback, payload) =>
+    dispatch({ type: MESSENGER_LOADED, callback, payload }),
+  onMessengerUnload: () =>
+    dispatch({ type: MESSENGER_UNLOADED }),
+  onMessengerUpdate: (payload) =>
+    dispatch({ type: MESSENGER_UPDATE, payload }),
 });
 
 class Home extends React.Component {
@@ -35,12 +44,14 @@ class Home extends React.Component {
       agent.Articles.all();
     const tagsPromise = agent.Tags.getAll();
     const promise = Promise.all([tagsPromise, articlesPromise]);
-
     promise.then(response => this.props.onLoad(tab, response));
+
+    agent.Messages.all().then(response => this.props.onMessengerLoad(this.props.onMessengerUpdate, response));
   }
 
   componentWillUnmount() {
     this.props.onUnload();
+    this.props.onMessengerUnload();
   }
 
   render() {

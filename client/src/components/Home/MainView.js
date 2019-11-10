@@ -1,8 +1,20 @@
 import ArticleList from '../ArticleList';
+import MessageList from '../MessageList';
 import React from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
 import { CHANGE_TAB } from '../../constants/actionTypes';
+
+const mapStateToProps = state => ({
+  ...state.messageList,
+  ...state.articleList,
+  tags: state.home.tags,
+  currentUser: state.common.currentUser
+});
+
+const mapDispatchToProps = dispatch => ({
+  onTabClick: (tab, payload) => dispatch({ type: CHANGE_TAB, tab, payload })
+});
 
 const YourFeedTab = props => {
   if (props.currentUser) {
@@ -24,12 +36,33 @@ const YourFeedTab = props => {
   return null;
 };
 
+const YourChatTab = props => {
+  if (props.currentUser) {
+    const clickHandler = ev => {
+      ev.preventDefault();
+      agent.Messages.all().then(response => props.onTabClick('chat', response));
+    }
+
+    return (
+      <li className="nav-item">
+        <button
+          className={ props.tab === 'chat' ? 'nav-link active' : 'nav-link' }
+          onClick={clickHandler}>
+          Your Chat
+        </button>
+      </li>
+    );
+  }
+  return null;
+};
+
 const GlobalFeedTab = props => {
   const clickHandler = ev => {
     ev.preventDefault();
     const articlesPromise = agent.Articles.all();
     articlesPromise.then(response => props.onTabClick('all', response));
   };
+
   return (
     <li className="nav-item">
       <button
@@ -39,6 +72,23 @@ const GlobalFeedTab = props => {
       </button>
     </li>
   );
+};
+
+const List = props => {
+  if (props.tab === 'chat') {
+    return (
+      <MessageList />
+    );
+  } else {
+    return (
+      <ArticleList
+        articles={props.articles}
+        loading={props.loading}
+        articles_count={props.articles_count}
+        currentPage={props.currentPage}
+        currentUser={props.currentUser} />
+    )
+  }
 };
 
 const TagFilterTab = props => {
@@ -55,16 +105,6 @@ const TagFilterTab = props => {
   );
 };
 
-const mapStateToProps = state => ({
-  ...state.articleList,
-  tags: state.home.tags,
-  currentUser: state.common.currentUser
-});
-
-const mapDispatchToProps = dispatch => ({
-  onTabClick: (tab, payload) => dispatch({ type: CHANGE_TAB, tab, payload })
-});
-
 const MainView = props => {
   return (
     <div className="col-md-9">
@@ -76,6 +116,11 @@ const MainView = props => {
             tab={props.tab}
             onTabClick={props.onTabClick} />
 
+          <YourChatTab
+            currentUser={props.currentUser}
+            tab={props.tab}
+            onTabClick={props.onTabClick} />
+
           <GlobalFeedTab tab={props.tab} onTabClick={props.onTabClick} />
 
           <TagFilterTab tag={props.tag} />
@@ -83,12 +128,13 @@ const MainView = props => {
         </ul>
       </div>
 
-      <ArticleList
+      <List
         articles={props.articles}
         loading={props.loading}
         articles_count={props.articles_count}
         currentPage={props.currentPage}
-        currentUser={props.currentUser} />
+        currentUser={props.currentUser}
+        tab={props.tab} />
     </div>
   );
 };

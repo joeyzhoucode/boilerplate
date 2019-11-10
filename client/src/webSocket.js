@@ -6,14 +6,13 @@ const CLIENT = "client";
 
 export const MESSAGE_TYPE = "MESSAGE";
 
-function webSocketConnection(userId, callback, connectionType) {
+function webSocket(callback, connectionType) {
   let accessToken = localStorage.getItem(ACCESS_TOKEN);
   let client = localStorage.getItem(CLIENT);
 
   var wsUrl = 'ws://' + BASE_URL + '/cable';
   wsUrl += '?access-token=' + accessToken + '&client=' + client;
 
-  this.userId = userId;
   this.callback = callback;
   this.connectionType = connectionType;
 
@@ -21,7 +20,7 @@ function webSocketConnection(userId, callback, connectionType) {
   this.webSocketConnections = {};
 }
 
-webSocketConnection.prototype.message = function(content, groupName) {
+webSocket.prototype.message = function(content, groupName) {
   let groupConnObj = this.webSocketConnections[groupName];
   if (groupConnObj) {
     groupConnObj.broadcastMessage(content);
@@ -30,7 +29,7 @@ webSocketConnection.prototype.message = function(content, groupName) {
   }
 }
 
-webSocketConnection.prototype.openNewGroup = function(groupName) {
+webSocket.prototype.openNewGroup = function(groupName) {
   if (groupName !== undefined && !(groupName in this.webSocketConnections)) {
     this.webSocketConnections[groupName] = this.createWebSocketConnection(groupName);
   } else {
@@ -38,13 +37,13 @@ webSocketConnection.prototype.openNewGroup = function(groupName) {
   }
 }
 
-webSocketConnection.prototype.disconnect = function() {
+webSocket.prototype.disconnect = function() {
   Object.values(this.webSocketConnections).forEach(c => {
     c.consumer.disconnect();
   });
 }
 
-webSocketConnection.prototype.createWebSocketConnection = function(groupName) {
+webSocket.prototype.createWebSocketConnection = function(groupName) {
   let scope = this;
   let connectionType;
   switch(scope.connectionType) {
@@ -54,7 +53,7 @@ webSocketConnection.prototype.createWebSocketConnection = function(groupName) {
     default:
       connectionType = undefined;
   }
-  return this.connection.subscriptions.create({channel: connectionType + 'Channel', group_name: groupName, user_id: scope.userId}, {
+  return this.connection.subscriptions.create({ channel: connectionType + 'Channel', group_name: groupName }, {
     connected: function() {
       console.log(connectionType + ' connected to channel. Group Name: ' + groupName + '.')
     },
@@ -62,18 +61,15 @@ webSocketConnection.prototype.createWebSocketConnection = function(groupName) {
       console.log(connectionType +  ' disconnected from channel. Group Name: ' + groupName + '.')
     },
     received: function(data) {
-      if (data.audience.indexOf(scope.userId) !== -1) {
-        return scope.callback(data)
-      }
+      return scope.callback(data)
     },
     broadcastMessage: function(content) {
       return this.perform('broadcast', {
         group_name: groupName,
-        user_id: scope.userId,
         content: content
       })
     }
   })
 }
 
-export default webSocketConnection;
+export default webSocket;
