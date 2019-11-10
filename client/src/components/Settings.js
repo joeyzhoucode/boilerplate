@@ -40,11 +40,11 @@ class SettingsForm extends React.Component {
     }
   }
 
-  componentDidUpdate(nextProps) {
-    if (nextProps.currentUser) {
+  componentDidUpdate(_prevProps) {
+    if (this.props.currentUser) {
       this.setState(Object.assign({}, this.state, {
-        image: nextProps.currentUser.image || '',
-        bio: nextProps.currentUser.bio
+        image: this.props.currentUser.image || '',
+        bio: this.props.currentUser.bio
       }));
     }
   }
