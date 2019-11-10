@@ -25,8 +25,4 @@ Rails.application.routes.draw do
 
     resources :tags, only: [:index]
   end
-
-  get '*path', to: "application#index", constraints: ->(request) do
-    request.session[:user_id] && !request.xhr? && request.format.html?
-  end
 end
