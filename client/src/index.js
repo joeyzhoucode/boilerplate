@@ -8,6 +8,8 @@ import { ConnectedRouter } from 'react-router-redux';
 
 import App from './components/App';
 
+import * as serviceWorker from "./serviceWorker";
+
 ReactDOM.render((
   <Provider store={store}>
     <ConnectedRouter history={history}>
@@ -18,3 +20,5 @@ ReactDOM.render((
   </Provider>
 
 ), document.getElementById('root'));
+
+serviceWorker.register();

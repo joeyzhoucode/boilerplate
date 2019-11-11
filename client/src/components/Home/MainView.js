@@ -36,7 +36,7 @@ const YourFeedTab = props => {
   return null;
 };
 
-const YourChatTab = props => {
+const GlobalChatTab = props => {
   if (props.currentUser) {
     const clickHandler = ev => {
       ev.preventDefault();
@@ -48,7 +48,7 @@ const YourChatTab = props => {
         <button
           className={ props.tab === 'chat' ? 'nav-link active' : 'nav-link' }
           onClick={clickHandler}>
-          Your Chat
+          Global Chat
         </button>
       </li>
     );
@@ -116,7 +116,7 @@ const MainView = props => {
             tab={props.tab}
             onTabClick={props.onTabClick} />
 
-          <YourChatTab
+          <GlobalChatTab
             currentUser={props.currentUser}
             tab={props.tab}
             onTabClick={props.onTabClick} />
